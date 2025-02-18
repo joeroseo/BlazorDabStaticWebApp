@@ -1,0 +1,62 @@
+﻿@page "/"
+@inject IJSRuntime JSRuntime
+
+<div class="video-container">
+    <video ref="videoPlayer" class="video-js" autoplay loop muted controls="false">
+        <source src="@localVideoSource" autoplay loop muted controls="false" type="video/mp4" />
+    </video>
+    <img src="/img/other/Tuskla.jpg" alt="tskla" class="centered-image" style="transform: scale(0.3)" />
+</div>
+
+@code {
+    private ElementReference videoPlayer;
+    private string localVideoSource = "/videos/Tesla.mp4";
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            // Handle video player initialization here (if needed)
+        }
+    }
+
+    public void Dispose()
+    {
+        // Dispose logic (if needed)
+    }
+}
+
+<style>
+    /* Custom CSS to hide all controls and text */
+    .minimal-player .vjs-control-bar,
+    .minimal-player .vjs-big-play-button,
+    .minimal-player .vjs-error-display,
+    .minimal-player .vjs-loading-spinner {
+        display: none !important;
+    }
+
+    /* Flexbox container for video and centered text */
+    .video-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 92vh; /* Adjust to fit your layout */
+        position: relative;
+    }
+
+    /* Set max width for video */
+    .video-js {
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    .centered-image {
+        position: absolute;
+        top: 0%; /* Adjust the distance from the top to 20% */
+        left: 0%; /* Center the image horizontally */
+        //transform: translateX(-50%); /* Center horizontally using translate */
+        margin-top: -70px;
+        margin-left: -70px;
+    }
+</style>

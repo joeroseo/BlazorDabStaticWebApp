@@ -1,0 +1,50 @@
+{
+  "$schema": "https://github.com/Azure/data-api-builder/releases/latest/download/dab.draft.schema.json",
+  "data-source": {
+    "database-type": "mssql",
+    "connection-string": "Server=tcp:mysqlmachine.database.windows.net,1433;Initial Catalog=BlazorSportsStore;Persist Security Info=False;User ID=admin1;Password=Test123#;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;",
+    "options": {
+      "set-session-context": false
+    }
+  },
+  "runtime": {
+    "rest": {
+      "enabled": true,
+      "path": "/rest"
+    },
+    "graphql": {
+      "allow-introspection": true,
+      "enabled": true,
+      "path": "/graphql"
+    },
+    "host": {
+      "mode": "production",
+  "routes": [
+    {
+      "route": "/data-api/rest/Products",
+      "methods": ["OPTIONS", "GET", "POST", "PUT", "DELETE"],
+      "allowedRoles": ["anonymous"]
+    }
+  ],
+  "cors": {
+    "allowedOrigins": ["https://localhost:7134"],
+    "methods": ["OPTIONS", "GET", "POST", "PUT", "DELETE"],
+    "headers": ["Content-Type", "Authorization"]
+  },
+      "authentication": {
+        "provider": "StaticWebApps"
+      }
+    }
+  },
+  "entities": {
+    "Products": {
+      "source": "Products",
+      "permissions": [
+        {
+          "actions": ["*"],
+          "role": "anonymous"
+        }
+      ]
+    }
+  }
+}

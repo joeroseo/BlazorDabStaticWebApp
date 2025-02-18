@@ -1,0 +1,260 @@
+@page "/products"
+@inject HttpClient Http
+@using BlazorDabApp.Models
+
+<h1>Product Management</h1>
+<blockquote>Open the browser console to see API responses.</blockquote>
+
+<button @onclick="ListProducts">List Products</button>
+
+<div class="form-container">
+    <h3>Get Product by ID</h3>
+    <input type="number" @bind="getId" placeholder="Enter Product ID" />
+    <button @onclick="GetProduct">Get</button>
+</div>
+
+<div class="form-container">
+    <h3>Create Product</h3>
+    <input type="text" @bind="createName" placeholder="Enter Name" />
+    <input type="number" @bind="createPrice" placeholder="Enter Price" />
+    <input type="text" @bind="createCategory" placeholder="Enter Category" />
+    <input type="text" @bind="createImage" placeholder="Enter Image Path" />
+
+    <select @bind="createAvailability">
+        <option value="true">Yes</option>
+        <option value="false">No</option>
+    </select>
+
+    <button @onclick="CreateProduct">Create</button>
+</div>
+
+<div class="form-container">
+    <h3>Update Product</h3>
+    <input type="number" @bind="updateId" placeholder="Enter ID" />
+    <input type="text" @bind="updateName" placeholder="Enter New Name" />
+    <button @onclick="UpdateProduct">Update</button>
+</div>
+
+<div class="form-container">
+    <h3>Delete Product</h3>
+    <input type="number" @bind="deleteId" placeholder="Enter ID" />
+    <button @onclick="DeleteProduct">Delete</button>
+</div>
+
+<!-- Centered Table Container -->
+<div class="table-container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Category</th>
+                <th>Image</th>
+                <th>Available</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in productList)
+            {
+                <tr>
+                    <td>@product.Id</td>
+                    <td>@product.Name</td>
+                    <td>@product.Price</td>
+                    <td>@product.Category</td>
+                    <td><img src="@product.Image" alt="Product Image" width="50"></td>
+                    <td>@(product.IsAvailable ? "Yes" : "No")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<style>
+    /* Center the table */
+    .table-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: auto;
+        text-align: center;
+        width: 80%;
+    }
+
+    /* Style the table */
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+        .table th, .table td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        .table th {
+            background-color: #f4f4f4;
+            font-weight: bold;
+        }
+
+    /* Style the form containers */
+    .form-container {
+        margin: 20px auto;
+        text-align: center;
+    }
+
+        .form-container input, .form-container select {
+            padding: 5px;
+            margin: 5px;
+        }
+
+        .form-container button {
+            padding: 7px 15px;
+            margin: 5px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+            .form-container button:hover {
+                background-color: #0056b3;
+            }
+</style>
+
+@code {
+    private string apiBase = "https://red-ground-01e402f1e.4.azurestaticapps.net/data-api/rest/Products";
+
+    private List<Product> productList = new List<Product>();
+    private int getId, updateId, deleteId;
+    private string createName, createCategory, createImage, updateName;
+    private int createPrice;
+    private bool createAvailability = true; // Default to 'Yes'
+
+    // ✅ LIST PRODUCTS
+    private async Task ListProducts()
+    {
+        try
+        {
+            // 🔹 Fetch raw JSON
+            var response = await Http.GetAsync(apiBase);
+            string responseBody = await response.Content.ReadAsStringAsync();
+            Console.WriteLine($"API Raw Response: {responseBody}"); // Debugging
+
+            // 🔹 Ensure API response is valid JSON
+            if (!response.IsSuccessStatusCode)
+            {
+                Console.Error.WriteLine($"API Error: {response.StatusCode} - {responseBody}");
+                return;
+            }
+
+            if (!response.Content.Headers.ContentType?.MediaType.Contains("application/json") ?? true)
+            {
+                Console.Error.WriteLine("Error: API did not return JSON.");
+                return;
+            }
+
+            // 🔹 Deserialize response (Extract `value` key)
+            var result = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, List<Product>>>(responseBody,
+                new System.Text.Json.JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+            if (result != null && result.ContainsKey("value"))
+            {
+                productList = result["value"];
+                StateHasChanged();
+            }
+            else
+            {
+                Console.Error.WriteLine("Error: Unexpected JSON format (missing 'value').");
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.Error.WriteLine($"Error fetching products: {ex.Message}");
+        }
+    }
+
+
+
+    // ✅ GET PRODUCT BY ID
+    private async Task GetProduct()
+    {
+        if (getId <= 0) return;
+
+        try
+        {
+            var product = await Http.GetFromJsonAsync<Product>($"{apiBase}/{getId}");
+            Console.WriteLine($"Found Product: {System.Text.Json.JsonSerializer.Serialize(product)}");
+        }
+        catch (Exception ex)
+        {
+            Console.Error.WriteLine($"Error fetching product: {ex.Message}");
+        }
+    }
+
+    // ✅ CREATE PRODUCT
+    private async Task CreateProduct()
+    {
+        if (string.IsNullOrEmpty(createName) || createPrice <= 0 ||
+            string.IsNullOrEmpty(createCategory) || string.IsNullOrEmpty(createImage))
+        {
+            Console.WriteLine("Please enter all fields.");
+            return;
+        }
+
+        var newProduct = new Product
+            {
+                Name = createName,
+                Price = createPrice,
+                Category = createCategory,
+                Image = createImage,
+                IsAvailable = createAvailability
+            };
+
+        try
+        {
+            var response = await Http.PostAsJsonAsync(apiBase, newProduct);
+            if (response.IsSuccessStatusCode) await ListProducts();
+        }
+        catch (Exception ex)
+        {
+            Console.Error.WriteLine($"Error creating product: {ex.Message}");
+        }
+    }
+
+    // ✅ UPDATE PRODUCT
+    private async Task UpdateProduct()
+    {
+        if (updateId <= 0 || string.IsNullOrEmpty(updateName)) return;
+
+        var updatedProduct = new { Name = updateName };
+
+        try
+        {
+            var response = await Http.PutAsJsonAsync($"{apiBase}/{updateId}", updatedProduct);
+            if (response.IsSuccessStatusCode) await ListProducts();
+        }
+        catch (Exception ex)
+        {
+            Console.Error.WriteLine($"Error updating product: {ex.Message}");
+        }
+    }
+
+    // ✅ DELETE PRODUCT
+    private async Task DeleteProduct()
+    {
+        if (deleteId <= 0) return;
+
+        try
+        {
+            var response = await Http.DeleteAsync($"{apiBase}/{deleteId}");
+            if (response.IsSuccessStatusCode) await ListProducts();
+        }
+        catch (Exception ex)
+        {
+            Console.Error.WriteLine($"Error deleting product: {ex.Message}");
+        }
+    }
+}

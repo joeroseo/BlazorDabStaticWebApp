@@ -45,6 +45,42 @@
           "role": "anonymous"
         }
       ]
+    },
+    "Users": {
+      "source": "Users",
+      "permissions": [
+        {
+          "actions": ["create", "read", "update", "delete"],
+          "role": "anonymous"
+        }
+      ]
+    },
+    "Orders": {
+      "source": "Orders",
+      "permissions": [
+        {
+          "actions": ["create", "read", "update", "delete"],
+          "role": "anonymous"
+        }
+      ]
+    },
+    "OrderInfos": {
+      "source": "Orderinfos",
+      "permissions": [
+        {
+          "actions": ["create", "read", "update", "delete"],
+          "role": "anonymous"
+        }
+      ]
+    },
+    "Carts": {
+      "source": "Carts",
+      "permissions": [
+        {
+          "actions": ["create", "read", "update", "delete"],
+          "role": "anonymous"
+        }
+      ]
     }
   }
 }

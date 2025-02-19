@@ -69,23 +69,23 @@ CREATE TABLE BlazorBlazorSportsStore.dbo.products (
 )
 
 INSERT INTO BlazorBlazorSportsStore.dbo.products (name,price,category,[image],isAvailable) VALUES
-	 (N'BaseBall',270,N'BaseBall',N'/uploads/BaseBall.jpg',1),
-	 (N'Bat',220,N'BaseBall',N'/uploads/Bat.jpg',1),
-	 (N'BaseballGlove',220,N'Baseba1l',N'/uploads/BaseBallGlove.jpg',1),
-	 (N'BowlingBag',105,N'Bowling',N'/uploads/BowlingBag.jpg',1),
-	 (N'BowlingBall',145,N'Bowling',N'/uploads/BowlingBall.jpg',1),
-	 (N'BowlingShoes',460,N'Bowling',N'/uploads/BowlingShoes.jpg',1),
-	 (N'Football',300,N'Football',N'/uploads/Football.jpg',1),
-	 (N'FootballCleats',70,N'Football',N'/uploads/FootballCleats.jpg',1),
-	 (N'FootballHelment',40,N'Football',N'/uploads/FootballHelment.jpg',1),
-	 (N'GolfBag',270,N'Golf',N'/uploads/GolfBag.jpg',1);
+	 (N'BaseBall',270,N'BaseBall',N'/img/uploads/BaseBall.jpg',1),
+	 (N'Bat',220,N'BaseBall',N'/img/uploads/Bat.jpg',1),
+	 (N'BaseballGlove',220,N'Baseba1l',N'/img/uploads/BaseBallGlove.jpg',1),
+	 (N'BowlingBag',105,N'Bowling',N'/img/uploads/BowlingBag.jpg',1),
+	 (N'BowlingBall',145,N'Bowling',N'/img/uploads/BowlingBall.jpg',1),
+	 (N'BowlingShoes',460,N'Bowling',N'/img/uploads/BowlingShoes.jpg',1),
+	 (N'Football',300,N'Football',N'/img/uploads/Football.jpg',1),
+	 (N'FootballCleats',70,N'Football',N'/img/uploads/FootballCleats.jpg',1),
+	 (N'FootballHelment',40,N'Football',N'/img/uploads/FootballHelment.jpg',1),
+	 (N'GolfBag',270,N'Golf',N'/img/uploads/GolfBag.jpg',1);
 INSERT INTO BlazorBlazorSportsStore.dbo.products (name,price,category,[image],isAvailable) VALUES
-	 (N'GolfBalls',270,N'Golf',N'/uploads/GolfBalls.jpg',1),
-	 (N'GolfGlove',270,N'Golf',N'/uploads/GolfGlove.jpg',1),
-	 (N'SoccerGoal',50,N'Soccer',N'/uploads/SoccerGoal.jpg',1),
-	 (N'SoccerBall',50,N'Soccer',N'/uploads/SoccerBall.jpg',1),
-	 (N'SoccerCleats',120,N'Soccer',N'/uploads/img/uploads/SoccerCleats.jpg',1),
-	 (N'SoccerFlags',120,N'Soccer',N'/uploads/SoccerFlags.jpg',1),
-	 (N'TennisRacket',180,N'Tennis',N'/uploads/TennisRacket.jpg',1),
-	 (N'TennisBalls',30,N'Tennis',N'/uploads/TennisBalls.jpg',1),
-	 (N'TennisBagLarge',180,N'Tennis',N'/uploads/TennisBag.jpg',1);
+	 (N'GolfBalls',270,N'Golf',N'/img/uploads/GolfBalls.jpg',1),
+	 (N'GolfGlove',270,N'Golf',N'/img/uploads/GolfGlove.jpg',1),
+	 (N'SoccerGoal',50,N'Soccer',N'/img/uploads/SoccerGoal.jpg',1),
+	 (N'SoccerBall',50,N'Soccer',N'/img/uploads/SoccerBall.jpg',1),
+	 (N'SoccerCleats',120,N'Soccer',N'/img/uploads/SoccerCleats.jpg',1),
+	 (N'SoccerFlags',120,N'Soccer',N'/img/uploads/SoccerFlags.jpg',1),
+	 (N'TennisRacket',180,N'Tennis',N'/img/uploads/TennisRacket.jpg',1),
+	 (N'TennisBalls',30,N'Tennis',N'/img/uploads/TennisBalls.jpg',1),
+	 (N'TennisBagLarge',180,N'Tennis',N'/img/uploads/TennisBag.jpg',1);

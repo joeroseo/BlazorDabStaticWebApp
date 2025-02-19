@@ -2,7 +2,7 @@
 Create the free database in azure the username abd password are those of the SQL machine
 In DBeaver create a connection String ait will initially connect to the master database
 Right click on that and open a SQL editor window
-Run the scripts below ...
+Run the scripts below ..
 */ 
 
 

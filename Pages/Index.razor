@@ -1,11 +1,84 @@
-@@page "/"
+﻿@page "/"
 
-@inject NavigationManager Navigation
+@inject IJSRuntime JSRuntime
+
+<div class="video-container">
+    <video id="videoPlayer" class="video-js"  autoplay muted="muted" loop controls="false">
+        <source src="@localVideoSource" type="video/mp4" />
+    </video>
+    <img src="/img/other/Store3.webp" alt="Tuskla" class="centered-image" style="transform: scale(0.15)" />
+</div>
+
+<button style="display: none;"  id="playButton" @onclick="PlayVideo">Play Video</button>
 
 @code {
-    protected override void OnInitialized()
+    //private string localVideoSource = "/videos/Sports5.mp4";
+    private string localVideoSource = "/videos/SportsVSDC3.mp4";
+
+    private async Task PlayVideo()
     {
-        Navigation.NavigateTo("/playvideo", true);
+        // Call JavaScript function to play the video
+        await JSRuntime.InvokeVoidAsync("playVideo");
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JSRuntime.InvokeVoidAsync("clickPlayButton");
+        }
     }
 }
 
+<script>
+    function playVideo() {
+        var video = document.getElementById('videoPlayer');
+        if (video) {
+            try {
+                video.muted = true;
+                video.play();
+           } catch (error) {
+                window.addEventListener('click', function () {
+                    video.play();
+                }, { once: true });
+            }
+        }
+    }
+
+    window.clickPlayButton = function () {
+        console.log('clickPlayButton function is executed.');
+        var playButton = document.getElementById('playButton');
+        if (playButton) {
+            playButton.click();
+        }
+    };
+</script>
+
+<style>
+    /* Flexbox container for video and centered image */
+    .video-container {
+        display: flex;
+        flex-direction: column;
+        
+        align-items: center;
+        height: 90vh; /* Adjust to fit your layout */
+        position: relative;
+    }
+
+    /* Set max width for video */
+    .video-js {
+        max-width: 110%;
+        max-height: 130%;
+        margin-top: -18px;
+        border: none;
+    }
+
+    /* Centered image style */
+    .centered-image {
+        position: absolute;
+        top: 0%;
+        left: 0%;
+        margin-top: -440px;
+        margin-left: -445px;
+    }
+</style>

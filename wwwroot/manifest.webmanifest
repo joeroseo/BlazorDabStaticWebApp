@@ -1,6 +1,6 @@
 {
-  "name": "BlazorDabApp",
-  "short_name": "BlazorDabApp",
+  "name": "BlazorSportStoreAuth",
+  "short_name": "BlazorSportStoreAuth",
   "id": "./",
   "start_url": "./",
   "display": "standalone",

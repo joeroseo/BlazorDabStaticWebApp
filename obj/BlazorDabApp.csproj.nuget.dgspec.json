@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\joero\\source\\repos\\BlazorDabApp\\BlazorDabApp.csproj": {}
+    "C:\\Users\\joero\\source\\repos\\BlazorSportsStore\\BlazorDabApp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\joero\\source\\repos\\BlazorDabApp\\BlazorDabApp.csproj": {
+    "C:\\Users\\joero\\source\\repos\\BlazorSportsStore\\BlazorDabApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\joero\\source\\repos\\BlazorDabApp\\BlazorDabApp.csproj",
+        "projectUniqueName": "C:\\Users\\joero\\source\\repos\\BlazorSportsStore\\BlazorDabApp.csproj",
         "projectName": "BlazorDabApp",
-        "projectPath": "C:\\Users\\joero\\source\\repos\\BlazorDabApp\\BlazorDabApp.csproj",
+        "projectPath": "C:\\Users\\joero\\source\\repos\\BlazorSportsStore\\BlazorDabApp.csproj",
         "packagesPath": "C:\\Users\\joero\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\joero\\source\\repos\\BlazorDabApp\\obj\\",
+        "outputPath": "C:\\Users\\joero\\source\\repos\\BlazorSportsStore\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

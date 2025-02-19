@@ -1,0 +1,100 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Azure/data-api-builder/main/schema/dab.draft.schema.json",
+  "data-source": {
+    "database-type": "mssql",
+    "connection-string": "Server=tcp:mysqlmachine.database.windows.net,1433;Initial Catalog=BlazorSportsStore;Persist Security Info=False;User ID=admin1;Password=Test123#;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;",
+    "options": {
+      "set-session-context": false
+    }
+  },
+  "runtime": {
+    "rest": {
+      "enabled": true,
+      "path": "/data-api/rest"
+    },
+    "graphql": {
+      "allow-introspection": true,
+      "enabled": true,
+      "path": "/graphql"
+    },
+    "host": {
+      "mode": "production",
+      "authentication": {
+        "provider": "StaticWebApps"
+      },
+      "cors": {
+        "allowedOrigins": [
+          "https://localhost:7209/",
+          "https://orange-tree-0f689cc1e.4.azurestaticapps.net",
+          
+        ],
+        "methods": ["OPTIONS", "GET", "POST", "PUT", "DELETE"],
+        "headers": ["Content-Type", "Authorization"]
+      }
+    }
+  },
+  "routes": [
+    {
+      "route": "/data-api/rest/{*segments}",
+      "rewrite": "https://orange-tree-0f689cc1e.4.azurestaticapps.net/data-api/rest/{segments}"
+    },
+    {
+      "route": "/graphql/{*segments}",
+      "rewrite": "https://orange-tree-0f689cc1e.4.azurestaticapps.net/graphql/{segments}"
+    },
+    {
+      "route": "/api/{*segments}",
+      "rewrite": "https://orange-tree-0f689cc1e.4.azurestaticapps.net/api/{segments}"
+    }
+  ],
+  "navigationFallback": {
+    "rewrite": "/index.html"
+  },
+  "entities": {
+    "Products": {
+      "source": "products",
+      "permissions": [
+        {
+          "actions": ["*"],
+          "role": "anonymous"
+        }
+      ]
+    },
+    "Users": {
+      "source": "Users",
+      "permissions": [
+        {
+          "actions": ["create", "read", "update", "delete"],
+          "role": "anonymous"
+        }
+      ]
+    },
+    "Orders": {
+      "source": "orders",
+      "permissions": [
+        {
+          "actions": ["create", "read", "update", "delete"],
+          "role": "anonymous"
+        }
+      ]
+    },
+    "OrderInfos": {
+      "source": "orderinfos",
+      "permissions": [
+        {
+          "actions": ["create", "read", "update", "delete"],
+          "role": "anonymous"
+        }
+      ]
+    },
+    "Carts": {
+      "source": "carts",
+      "permissions": [
+        {
+          "actions": ["create", "read", "update", "delete"],
+          "role": "anonymous"
+        }
+      ]
+    }
+  }
+}

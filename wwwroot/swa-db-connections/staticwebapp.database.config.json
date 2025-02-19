@@ -1,0 +1,79 @@
+{
+  "$schema": "https://github.com/Azure/data-api-builder/releases/latest/download/dab.draft.schema.json",
+  "data-source": {
+    "database-type": "mssql",
+    "connection-string": "Server=tcp:mysqlmachine.database.windows.net,1433;Initial Catalog=BlazorSportsStore;Persist Security Info=False;User ID=admin1;Password=Test123#;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;",
+    "options": {
+      "set-session-context": false
+    },
+    "schema": "SportsStore"
+  },
+  "runtime": {
+    "rest": {
+      "enabled": true,
+      "path": "/rest"
+    },
+    "graphql": {
+      "allow-introspection": true,
+      "enabled": true,
+      "path": "/graphql"
+    },
+    "host": {
+      "mode": "production",
+      "cors": {
+        "origins": ["*"],
+        "allow-credentials": false
+      },
+      "authentication": {
+        "provider": "StaticWebApps"
+      }
+    }
+  },
+  "entities": {
+    "Products": {
+      "source": "SportsStore.products",
+      "permissions": [
+        {
+          "actions": ["*"],
+          "role": "anonymous"
+        }
+      ]
+    },
+    "Users": {
+      "source": "SportsStore.Users",
+      "permissions": [
+        {
+          "actions": ["create", "read", "update", "delete"],
+          "role": "anonymous"
+        }
+      ]
+    },
+    "Orders": {
+      "source": "SportsStore.orders",
+      "permissions": [
+        {
+          "actions": ["create", "read", "update", "delete"],
+          "role": "anonymous"
+        }
+      ]
+    },
+    "OrderInfos": {
+      "source": "SportsStore.orderinfos",
+      "permissions": [
+        {
+          "actions": ["create", "read", "update", "delete"],
+          "role": "anonymous"
+        }
+      ]
+    },
+    "Carts": {
+      "source": "SportsStore.carts",
+      "permissions": [
+        {
+          "actions": ["create", "read", "update", "delete"],
+          "role": "anonymous"
+        }
+      ]
+    }
+  }
+}

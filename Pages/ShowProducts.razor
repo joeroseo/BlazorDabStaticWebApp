@@ -1,0 +1,229 @@
+@page "/showproducts"
+
+@using Microsoft.AspNetCore.Components
+@using Microsoft.AspNetCore.Components.Web
+@using Microsoft.JSInterop
+@using System.Net.Http
+@using System.Net.Http.Json
+@using System.Text.Json
+@using System.Collections.Generic
+@using System.Linq
+
+@using BlazorSportStoreAuth.Models
+@using BlazorSportStoreAuth.Services
+
+@inject NavigationManager NavigationManager
+@inject HttpClient HttpClient
+@inject CartService CartService
+@inject IJSRuntime JS
+
+<div class="container mt-4">
+    <h4>Products</h4>
+
+    <!-- Category Dropdown -->
+    <div class="mb-3">
+        <label for="category" class="form-label">Category</label>
+        <select id="category" class="form-select" style="width: 15ch;" @bind="category">
+            <option value="" selected>All</option>
+            @foreach (var cat in categories)
+            {
+                <option value="@cat">@cat</option>
+            }
+        </select>
+    </div>
+
+    <!-- Flexbox Wrapper -->
+    <div class="product-container">
+        @foreach (var product in filteredProducts)
+        {
+            <div class="product-card">
+                <img src="@GetImageUrl(product.Image)" class="product-image" alt="@product.Name">
+                <div class="product-info">
+                    <h6 class="product-title">@product.Name</h6>
+                    <p class="product-price">@product.Price.ToString("C2")</p>
+                    <p class="product-availability">Available: @(product.IsAvailable ? "Yes" : "No")</p>
+                    <button class="btn btn-primary btn-sm" @onclick="() => AddProductToCart(product)">Add to Cart</button>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@code {
+    private List<Product> products = new();
+    private List<Product> filteredProducts = new();
+    private HashSet<string> categories = new();
+    private string apiBase = "http://localhost:5000/rest/Products";
+
+    private string _category = "";
+    private string category
+    {
+        get => _category;
+        set
+        {
+            _category = value;
+            FilterProducts();
+        }
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            await ListProducts();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error initializing ShowProducts component: {ex.Message}");
+        }
+    }
+
+    private async Task ListProducts()
+    {
+        try
+        {
+            var response = await HttpClient.GetAsync(apiBase);
+            string responseBody = await response.Content.ReadAsStringAsync();
+            Console.WriteLine($"API Raw Response: {responseBody}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                if (!response.Content.Headers.ContentType?.MediaType.Contains("application/json") ?? true)
+                {
+                    Console.Error.WriteLine("API did not return JSON. Check API response.");
+                    return;
+                }
+
+                var deserializedResponse = JsonSerializer.Deserialize<Dictionary<string, List<Product>>>(responseBody,
+                    new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+                if (deserializedResponse != null && deserializedResponse.ContainsKey("value"))
+                {
+                    products = deserializedResponse["value"]
+                        .Select(p => new Product
+                            {
+                                Id = p.Id,
+                                Name = p.Name,
+                                Price = p.Price,
+                                Category = p.Category,
+                                Image = p.Image,
+                                IsAvailable = p.IsAvailable
+                            }).ToList();
+
+                    Console.WriteLine($"Deserialized {products.Count} products.");
+
+                    categories = products.Select(p => p.Category).Where(c => !string.IsNullOrEmpty(c)).ToHashSet();
+                    FilterProducts();
+                }
+                else
+                {
+                    Console.Error.WriteLine("Unexpected JSON structure.");
+                }
+            }
+            else
+            {
+                Console.Error.WriteLine($"API Error: {response.StatusCode} - {responseBody}");
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.Error.WriteLine($"Error fetching products: {ex.Message}");
+        }
+    }
+
+    private void FilterProducts()
+    {
+        filteredProducts = string.IsNullOrEmpty(category)
+            ? products
+            : products.Where(p => p.Category == category).ToList();
+        StateHasChanged();
+    }
+
+    void AddProductToCart(Product product)
+    {
+        CartService.AddToCart(product);
+        UpdateCartCount();
+    }
+
+    async void UpdateCartCount()
+    {
+        int cartCount = CartService.GetCartTotalQuantity();
+        await JS.InvokeVoidAsync("updateCartCount", cartCount);
+    }
+
+    private string GetImageUrl(string imagePath)
+    {
+        if (string.IsNullOrWhiteSpace(imagePath))
+            return "/img/default.jpg";
+
+        return imagePath.StartsWith("../") ? imagePath.Substring(3) : imagePath;
+    }
+}
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        background-color: #f4f4f4;
+    }
+
+    .product-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+        padding: 20px;
+        margin: 0 auto;
+        max-width: 1200px;
+    }
+
+    .product-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 250px;
+        padding: 15px;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s;
+    }
+
+        .product-card:hover {
+            transform: scale(1.05);
+        }
+
+    .product-image {
+        width: 100%;
+        height: auto;
+        max-height: 200px;
+        object-fit: contain;
+        margin-bottom: 10px;
+    }
+
+    .product-info {
+        text-align: center;
+    }
+
+    .product-title {
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    .product-price {
+        color: green;
+        font-size: 14px;
+    }
+
+    .product-availability {
+        font-size: 12px;
+        color: gray;
+    }
+
+    .btn-primary {
+        font-size: 14px;
+        padding: 5px 10px;
+    }
+</style>

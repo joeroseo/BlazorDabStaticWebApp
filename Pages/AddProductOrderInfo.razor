@@ -1,0 +1,225 @@
+﻿@page "/orderproductinfo/add"
+@using BlazorSportStoreAuth.Models
+@using Microsoft.AspNetCore.Components.Forms
+@using Blazored.LocalStorage
+@using BlazorSportStoreAuth.Services
+@using BlazorSportStoreAuth.Interfaces
+@inject CartService CartService
+@inject NavigationManager NavigationManager
+@inject HttpClient Http
+@inject IJSRuntime JsRuntime
+@inject ILocalStorageService LocalStorage
+
+<h3>Order Product Info</h3>
+
+<div class="flex-container">
+    <div class="flex-child">
+        <EditForm Model="@orderInfo" OnValidSubmit="SaveOrderInfo">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+            <h4>Shipping Info</h4>
+            <div class="form-group">
+                <label>Email:</label>
+                <InputText class="form-control input-wide" @bind-Value="orderInfo.Email" />
+            </div>
+            <div class="form-group">
+                <label>First Name:</label>
+                <InputText class="form-control input-wide" @bind-Value="orderInfo.FirstName" />
+            </div>
+            <div class="form-group">
+                <label>Last Name:</label>
+                <InputText class="form-control input-wide" @bind-Value="orderInfo.LastName" />
+            </div>
+            <div class="form-group">
+                <label>Street Address:</label>
+                <InputText class="form-control input-wide" @bind-Value="orderInfo.Street" />
+            </div>
+            <div class="form-group">
+                <label>City:</label>
+                <InputText class="form-control input-wide" @bind-Value="orderInfo.City" />
+            </div>
+            <div class="form-group">
+                <label>Order Date:</label>
+                <InputText class="form-control input-wide" @bind-Value="orderInfo.OrderDate" readonly />
+            </div>
+            <div class="form-group-inline">
+                <div class="input-wrapper">
+                    <label>State:</label>
+                    <InputText class="form-control small-input" @bind-Value="orderInfo.State" maxlength="10" />
+                </div>
+                <div class="input-wrapper">
+                    <label>Zip:</label>
+                    <InputText class="form-control small-input" @bind-Value="orderInfo.Zip" maxlength="10" />
+                </div>
+                <button type="submit" class="btn btn-primary" style="margin-top: 22px;" disabled="@isLoading">
+                    @(isLoading ? "Saving..." : "Order")
+                </button>
+            </div>
+        </EditForm>
+    </div>
+
+    <div class="flex-child">
+        <h4>Payment Info</h4>
+        <div class="form-group">
+            <label>Card Number:</label>
+            <InputText class="form-control input-wide" @bind-Value="cardNumber" />
+        </div>
+        <div class="form-group">
+            <label>Expiration:</label>
+            <InputDate class="form-control" @bind-Value="expirationDate" TValue="DateTime" />
+        </div>
+        <div class="form-group">
+            <label>CVC:</label>
+            <InputText class="form-control" @bind-Value="cvc" />
+        </div>
+    </div>
+</div>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        background-color: #f4f4f4;
+    }
+
+    .flex-container {
+        display: flex;
+        justify-content: space-between;
+        margin: 20px;
+        gap: 30px;
+    }
+
+    .flex-child {
+        flex: 1;
+        border: 1px solid #d3d3d3;
+        padding: 10px;
+        background-color: #ffffff;
+    }
+
+    .form-group {
+        margin-bottom: 10px;
+    }
+
+    .form-group-inline {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .input-wrapper {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .small-input {
+        width: 100px;
+    }
+
+    .input-wide {
+        width: 35ch;
+    }
+
+    .btn-primary {
+        height: 38px;
+        padding: 5px 15px;
+    }
+</style>
+
+@code {
+    private bool isLoading = false;
+    private string errorMessage = "";
+    protected ProductOrderInfo orderInfo = new();
+    private string cardNumber = "XXXX XXXX XXXX XXXX";
+    private DateTime expirationDate = DateTime.Today;
+    private string cvc = "XXX";
+    private string generatedOrderId;
+
+    protected override void OnInitialized()
+    {
+        generatedOrderId = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds().ToString();
+        orderInfo.order_id = generatedOrderId;
+        orderInfo.OrderDate = DateTime.Now.ToString("MM/dd/yyyy"); // Set Order Date
+
+        // Set default values
+        orderInfo.Email = "joerosejax@gmail.com";
+        orderInfo.FirstName = "Joe";
+        orderInfo.LastName = "OConnor";
+        orderInfo.Street = "144 Castlegate Ln";
+        orderInfo.City = "St Johns";
+        orderInfo.State = "FL";
+        orderInfo.Zip = "32259";
+    }
+
+    protected async Task SaveOrderInfo()
+    {
+        isLoading = true;
+        errorMessage = "";
+
+        try
+        {
+            var orderPayload = new
+            {
+                order_id = generatedOrderId,
+                email = orderInfo.Email,
+                fname = orderInfo.FirstName,
+                lname = orderInfo.LastName,
+                street = orderInfo.Street,
+                city = orderInfo.City,
+                state = orderInfo.State,
+                zip = orderInfo.Zip,
+                subtotal = orderInfo.Subtotal,
+                tax = orderInfo.Tax,
+                shipping = orderInfo.Shipping,
+                total = orderInfo.Total,
+                status = orderInfo.Status,
+                order_date = orderInfo.OrderDate // Include Order Date
+            };
+
+            // Use an absolute URL to ensure correctness
+            var orderApiUrl = new Uri(Http.BaseAddress, "rest/OrderInfos");
+
+            var response = await Http.PostAsJsonAsync(orderApiUrl, orderPayload);
+
+            if (response.IsSuccessStatusCode)
+            {
+                Console.WriteLine($"✅ Order Created with ID: {generatedOrderId}");
+
+                foreach (var item in CartService.CartItems)
+                {
+                    var orderItemPayload = new
+                    {
+                        order_id = generatedOrderId,
+                        item = item.Product.Name,
+                        price = item.Product.Price,
+                        quantity = item.Quantity,
+                        itemTotal = item.Product.Price * item.Quantity
+                    };
+
+                    var orderItemApiUrl = new Uri(Http.BaseAddress, "rest/Orders");
+                    await Http.PostAsJsonAsync(orderItemApiUrl, orderItemPayload);
+                }
+
+                CartService.CartItems.Clear();
+
+                // Show order confirmation popup
+                await JsRuntime.InvokeVoidAsync("alert", $"Your Order has been placed. Your Order ID is - {generatedOrderId}");
+
+                // Redirect to the home page after the user clicks "OK"
+                NavigationManager.NavigateTo("/");
+            }
+            else
+            {
+                errorMessage = $"❌ Failed to create order. {await response.Content.ReadAsStringAsync()}";
+            }
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"❌ Error saving order: {ex.Message}";
+        }
+
+        isLoading = false;
+    }
+
+}

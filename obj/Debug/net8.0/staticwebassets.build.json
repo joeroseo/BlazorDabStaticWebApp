@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "fq4m+74zIUTgulYn278jTW7eBdVb2lcsS3NBoRn72EU=",
+  "Hash": "ad2txen4mcBhAhxjUMiHJK8fQ3II+uYM+f7El6mwaxA=",
   "Source": "BlazorSportStoreAuth",
   "BasePath": "/",
   "Mode": "Root",
@@ -94,8 +94,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "WasmResource",
       "AssetTraitValue": "manifest",
-      "Fingerprint": "xz30xzxf3w",
-      "Integrity": "w+5TAqFul5eGVJfR1zdlY02tkbmIAWAk5L1n3s203rE=",
+      "Fingerprint": "yk7897l467",
+      "Integrity": "Yk0+krX49w5irxw2NYk/jWmwX69f0/E6bPsz2t3b9cE=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "obj\\Debug\\net8.0\\blazor.boot.json"
@@ -157,8 +157,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "WasmResource",
       "AssetTraitValue": "symbol",
-      "Fingerprint": "djwuw31seq",
-      "Integrity": "ORzeJJ0uPq0q2TQc8Rei2oyi56r4xyzyYhdKcBb36uo=",
+      "Fingerprint": "yfr7h7opbn",
+      "Integrity": "rnO4Ahs5Jbo7QJjxhjD87XGCAGGSS8HWjE3yovaCZwo=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "obj\\Debug\\net8.0\\BlazorSportStoreAuth.pdb"
@@ -178,8 +178,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "WasmResource",
       "AssetTraitValue": "runtime",
-      "Fingerprint": "drbltthygi",
-      "Integrity": "yY9nuo+WBid3wld+UiIJDUembs5VaP2T4owEA89av7M=",
+      "Fingerprint": "04k947j19d",
+      "Integrity": "ED6RmWIFg+gK8zlEWxjU1OOOEkCTcMsrNDeGt3StzM8=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\joero\\source\\repos\\BlazorSportStoreAuthNew\\obj\\Debug\\net8.0\\webcil\\BlazorSportStoreAuth.wasm"
@@ -10223,7 +10223,7 @@
       "OriginalItemSpec": "C:\\Users\\joero\\source\\repos\\BlazorSportStoreAuthNew\\bin\\Debug\\net8.0\\wwwroot\\_framework\\System.Xml.XDocument.wasm"
     },
     {
-      "Identity": "C:\\Users\\joero\\source\\repos\\BlazorSportStoreAuthNew\\obj\\Debug\\net8.0\\compressed\\h5ckw10ez0-xz30xzxf3w.gz",
+      "Identity": "C:\\Users\\joero\\source\\repos\\BlazorSportStoreAuthNew\\obj\\Debug\\net8.0\\compressed\\h5ckw10ez0-yk7897l467.gz",
       "SourceId": "BlazorSportStoreAuth",
       "SourceType": "Computed",
       "ContentRoot": "C:\\Users\\joero\\source\\repos\\BlazorSportStoreAuthNew\\obj\\Debug\\net8.0\\compressed\\",
@@ -10237,8 +10237,8 @@
       "RelatedAsset": "C:\\Users\\joero\\source\\repos\\BlazorSportStoreAuthNew\\bin\\Debug\\net8.0\\wwwroot\\_framework\\blazor.boot.json",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "q7y3mvbsi9",
-      "Integrity": "Cs7E387vk/Xer+cStfxTNei2ZDl0LmTFjIcKcTGUhn0=",
+      "Fingerprint": "ionsiaxee6",
+      "Integrity": "4rAarscjeVURksT0BJoSx5FEpQf5F5gjAB1ORUMeOY0=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\joero\\source\\repos\\BlazorSportStoreAuthNew\\bin\\Debug\\net8.0\\wwwroot\\_framework\\blazor.boot.json"
@@ -10349,7 +10349,7 @@
       "OriginalItemSpec": "C:\\Users\\joero\\source\\repos\\BlazorSportStoreAuthNew\\bin\\Debug\\net8.0\\wwwroot\\_framework\\System.Security.Principal.Windows.wasm"
     },
     {
-      "Identity": "C:\\Users\\joero\\source\\repos\\BlazorSportStoreAuthNew\\obj\\Debug\\net8.0\\compressed\\hznh1kd0wd-djwuw31seq.gz",
+      "Identity": "C:\\Users\\joero\\source\\repos\\BlazorSportStoreAuthNew\\obj\\Debug\\net8.0\\compressed\\hznh1kd0wd-yfr7h7opbn.gz",
       "SourceId": "BlazorSportStoreAuth",
       "SourceType": "Computed",
       "ContentRoot": "C:\\Users\\joero\\source\\repos\\BlazorSportStoreAuthNew\\obj\\Debug\\net8.0\\compressed\\",
@@ -10363,8 +10363,8 @@
       "RelatedAsset": "C:\\Users\\joero\\source\\repos\\BlazorSportStoreAuthNew\\bin\\Debug\\net8.0\\wwwroot\\_framework\\BlazorSportStoreAuth.pdb",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "j2yrz5pf6n",
-      "Integrity": "O2zaOjxertwGxytBavt+8mSm1bMwY5SXLCf2ae8y6Vs=",
+      "Fingerprint": "rd3ogamoc3",
+      "Integrity": "4QChYpZN1H+OiBM3HDxGjMwUg6tzvLvYAyeNIM2RffI=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\joero\\source\\repos\\BlazorSportStoreAuthNew\\bin\\Debug\\net8.0\\wwwroot\\_framework\\BlazorSportStoreAuth.pdb"
@@ -12260,7 +12260,7 @@
       "OriginalItemSpec": "C:\\Users\\joero\\source\\repos\\BlazorSportStoreAuthNew\\bin\\Debug\\net8.0\\wwwroot\\_framework\\System.Net.Primitives.wasm"
     },
     {
-      "Identity": "C:\\Users\\joero\\source\\repos\\BlazorSportStoreAuthNew\\obj\\Debug\\net8.0\\compressed\\t8u1ly7gw3-drbltthygi.gz",
+      "Identity": "C:\\Users\\joero\\source\\repos\\BlazorSportStoreAuthNew\\obj\\Debug\\net8.0\\compressed\\t8u1ly7gw3-04k947j19d.gz",
       "SourceId": "BlazorSportStoreAuth",
       "SourceType": "Computed",
       "ContentRoot": "C:\\Users\\joero\\source\\repos\\BlazorSportStoreAuthNew\\obj\\Debug\\net8.0\\compressed\\",
@@ -12274,8 +12274,8 @@
       "RelatedAsset": "C:\\Users\\joero\\source\\repos\\BlazorSportStoreAuthNew\\bin\\Debug\\net8.0\\wwwroot\\_framework\\BlazorSportStoreAuth.wasm",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "9kab4msl3b",
-      "Integrity": "x1kH5GSeEhnyVC/3E+Ek1ZU+Jh5PWKgKN4aHcCMK7Fo=",
+      "Fingerprint": "8s6ixg0jwu",
+      "Integrity": "KEz04GuQfkLWcbndUZL2/nvOu0pUyP6J5iba9ttrd3g=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\joero\\source\\repos\\BlazorSportStoreAuthNew\\bin\\Debug\\net8.0\\wwwroot\\_framework\\BlazorSportStoreAuth.wasm"
@@ -13492,8 +13492,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "BlazorServiceWorker",
       "AssetTraitValue": "ServiceWorkerJs",
-      "Fingerprint": "uxr111h44g",
-      "Integrity": "TmdN4Ez+TFj565/GIY7XFuY1qfh+gcko39YhOOBKLo8=",
+      "Fingerprint": "i7ebo3ckk4",
+      "Integrity": "ruBEgGhIiV5Soxmc/C2HmU81woHorfti49vEmZd5DeE=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "wwwroot\\service-worker.js"
@@ -13513,8 +13513,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "BlazorServiceWorker",
       "AssetTraitValue": "ServiceWorkerManifest",
-      "Fingerprint": "c83oa0ebtl",
-      "Integrity": "pO9dhSAZ1xmAZN0AokiY1Mh8rGEKNpqgH0E3wU0p96k=",
+      "Fingerprint": "679x3xheyj",
+      "Integrity": "Lrwm+LKEDcnufVpkvY8LdCd45YPqRLzx9UyZqn9rSzQ=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "obj\\Debug\\net8.0\\service-worker\\service-worker-assets.js.build"
@@ -22608,7 +22608,46 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"w+5TAqFul5eGVJfR1zdlY02tkbmIAWAk5L1n3s203rE=\""
+          "Value": "\"Yk0+krX49w5irxw2NYk/jWmwX69f0/E6bPsz2t3b9cE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 19 Feb 2025 23:49:19 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-Yk0+krX49w5irxw2NYk/jWmwX69f0/E6bPsz2t3b9cE="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/blazor.boot.json",
+      "AssetFile": "C:\\Users\\joero\\source\\repos\\BlazorSportStoreAuthNew\\obj\\Debug\\net8.0\\compressed\\h5ckw10ez0-yk7897l467.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000073746313"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "13559"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"4rAarscjeVURksT0BJoSx5FEpQf5F5gjAB1ORUMeOY0=\""
         },
         {
           "Name": "Last-Modified",
@@ -22617,45 +22656,6 @@
         {
           "Name": "Cache-Control",
           "Value": "no-cache"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-w+5TAqFul5eGVJfR1zdlY02tkbmIAWAk5L1n3s203rE="
-        }
-      ]
-    },
-    {
-      "Route": "_framework/blazor.boot.json",
-      "AssetFile": "C:\\Users\\joero\\source\\repos\\BlazorSportStoreAuthNew\\obj\\Debug\\net8.0\\compressed\\h5ckw10ez0-xz30xzxf3w.gz",
-      "Selectors": [
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip",
-          "Quality": "0.000073735437"
-        }
-      ],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "13561"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"Cs7E387vk/Xer+cStfxTNei2ZDl0LmTFjIcKcTGUhn0=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Wed, 19 Feb 2025 22:52:19 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
         },
         {
           "Name": "Content-Encoding",
@@ -22671,19 +22671,19 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"w+5TAqFul5eGVJfR1zdlY02tkbmIAWAk5L1n3s203rE=\""
+          "Value": "W/\"Yk0+krX49w5irxw2NYk/jWmwX69f0/E6bPsz2t3b9cE=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-w+5TAqFul5eGVJfR1zdlY02tkbmIAWAk5L1n3s203rE="
+          "Value": "sha256-Yk0+krX49w5irxw2NYk/jWmwX69f0/E6bPsz2t3b9cE="
         }
       ]
     },
     {
       "Route": "_framework/blazor.boot.json.gz",
-      "AssetFile": "C:\\Users\\joero\\source\\repos\\BlazorSportStoreAuthNew\\obj\\Debug\\net8.0\\compressed\\h5ckw10ez0-xz30xzxf3w.gz",
+      "AssetFile": "C:\\Users\\joero\\source\\repos\\BlazorSportStoreAuthNew\\obj\\Debug\\net8.0\\compressed\\h5ckw10ez0-yk7897l467.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -22692,7 +22692,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "13561"
+          "Value": "13559"
         },
         {
           "Name": "Content-Type",
@@ -22700,11 +22700,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"Cs7E387vk/Xer+cStfxTNei2ZDl0LmTFjIcKcTGUhn0=\""
+          "Value": "\"4rAarscjeVURksT0BJoSx5FEpQf5F5gjAB1ORUMeOY0=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 19 Feb 2025 22:52:19 GMT"
+          "Value": "Wed, 19 Feb 2025 22:57:30 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -22722,7 +22722,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-Cs7E387vk/Xer+cStfxTNei2ZDl0LmTFjIcKcTGUhn0="
+          "Value": "sha256-4rAarscjeVURksT0BJoSx5FEpQf5F5gjAB1ORUMeOY0="
         }
       ]
     },
@@ -23011,7 +23011,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "67788"
+          "Value": "67784"
         },
         {
           "Name": "Content-Type",
@@ -23019,7 +23019,46 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"ORzeJJ0uPq0q2TQc8Rei2oyi56r4xyzyYhdKcBb36uo=\""
+          "Value": "\"rnO4Ahs5Jbo7QJjxhjD87XGCAGGSS8HWjE3yovaCZwo=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 19 Feb 2025 23:49:18 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-rnO4Ahs5Jbo7QJjxhjD87XGCAGGSS8HWjE3yovaCZwo="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/BlazorSportStoreAuth.pdb",
+      "AssetFile": "C:\\Users\\joero\\source\\repos\\BlazorSportStoreAuthNew\\obj\\Debug\\net8.0\\compressed\\hznh1kd0wd-yfr7h7opbn.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000019904855"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "50238"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"4QChYpZN1H+OiBM3HDxGjMwUg6tzvLvYAyeNIM2RffI=\""
         },
         {
           "Name": "Last-Modified",
@@ -23028,45 +23067,6 @@
         {
           "Name": "Cache-Control",
           "Value": "no-cache"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-ORzeJJ0uPq0q2TQc8Rei2oyi56r4xyzyYhdKcBb36uo="
-        }
-      ]
-    },
-    {
-      "Route": "_framework/BlazorSportStoreAuth.pdb",
-      "AssetFile": "C:\\Users\\joero\\source\\repos\\BlazorSportStoreAuthNew\\obj\\Debug\\net8.0\\compressed\\hznh1kd0wd-djwuw31seq.gz",
-      "Selectors": [
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip",
-          "Quality": "0.000019919922"
-        }
-      ],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "50200"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"O2zaOjxertwGxytBavt+8mSm1bMwY5SXLCf2ae8y6Vs=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Wed, 19 Feb 2025 22:52:18 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
         },
         {
           "Name": "Content-Encoding",
@@ -23082,19 +23082,19 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"ORzeJJ0uPq0q2TQc8Rei2oyi56r4xyzyYhdKcBb36uo=\""
+          "Value": "W/\"rnO4Ahs5Jbo7QJjxhjD87XGCAGGSS8HWjE3yovaCZwo=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-ORzeJJ0uPq0q2TQc8Rei2oyi56r4xyzyYhdKcBb36uo="
+          "Value": "sha256-rnO4Ahs5Jbo7QJjxhjD87XGCAGGSS8HWjE3yovaCZwo="
         }
       ]
     },
     {
       "Route": "_framework/BlazorSportStoreAuth.pdb.gz",
-      "AssetFile": "C:\\Users\\joero\\source\\repos\\BlazorSportStoreAuthNew\\obj\\Debug\\net8.0\\compressed\\hznh1kd0wd-djwuw31seq.gz",
+      "AssetFile": "C:\\Users\\joero\\source\\repos\\BlazorSportStoreAuthNew\\obj\\Debug\\net8.0\\compressed\\hznh1kd0wd-yfr7h7opbn.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -23103,7 +23103,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "50200"
+          "Value": "50238"
         },
         {
           "Name": "Content-Type",
@@ -23111,11 +23111,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"O2zaOjxertwGxytBavt+8mSm1bMwY5SXLCf2ae8y6Vs=\""
+          "Value": "\"4QChYpZN1H+OiBM3HDxGjMwUg6tzvLvYAyeNIM2RffI=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 19 Feb 2025 22:52:18 GMT"
+          "Value": "Wed, 19 Feb 2025 22:57:29 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -23133,7 +23133,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-O2zaOjxertwGxytBavt+8mSm1bMwY5SXLCf2ae8y6Vs="
+          "Value": "sha256-4QChYpZN1H+OiBM3HDxGjMwUg6tzvLvYAyeNIM2RffI="
         }
       ]
     },
@@ -23156,7 +23156,46 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"yY9nuo+WBid3wld+UiIJDUembs5VaP2T4owEA89av7M=\""
+          "Value": "\"ED6RmWIFg+gK8zlEWxjU1OOOEkCTcMsrNDeGt3StzM8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 19 Feb 2025 23:49:18 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-ED6RmWIFg+gK8zlEWxjU1OOOEkCTcMsrNDeGt3StzM8="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/BlazorSportStoreAuth.wasm",
+      "AssetFile": "C:\\Users\\joero\\source\\repos\\BlazorSportStoreAuthNew\\obj\\Debug\\net8.0\\compressed\\t8u1ly7gw3-04k947j19d.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000023528305"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "42501"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"KEz04GuQfkLWcbndUZL2/nvOu0pUyP6J5iba9ttrd3g=\""
         },
         {
           "Name": "Last-Modified",
@@ -23165,45 +23204,6 @@
         {
           "Name": "Cache-Control",
           "Value": "no-cache"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-yY9nuo+WBid3wld+UiIJDUembs5VaP2T4owEA89av7M="
-        }
-      ]
-    },
-    {
-      "Route": "_framework/BlazorSportStoreAuth.wasm",
-      "AssetFile": "C:\\Users\\joero\\source\\repos\\BlazorSportStoreAuthNew\\obj\\Debug\\net8.0\\compressed\\t8u1ly7gw3-drbltthygi.gz",
-      "Selectors": [
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip",
-          "Quality": "0.000023495689"
-        }
-      ],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "42560"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"x1kH5GSeEhnyVC/3E+Ek1ZU+Jh5PWKgKN4aHcCMK7Fo=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Wed, 19 Feb 2025 22:52:18 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
         },
         {
           "Name": "Content-Encoding",
@@ -23219,19 +23219,19 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"yY9nuo+WBid3wld+UiIJDUembs5VaP2T4owEA89av7M=\""
+          "Value": "W/\"ED6RmWIFg+gK8zlEWxjU1OOOEkCTcMsrNDeGt3StzM8=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-yY9nuo+WBid3wld+UiIJDUembs5VaP2T4owEA89av7M="
+          "Value": "sha256-ED6RmWIFg+gK8zlEWxjU1OOOEkCTcMsrNDeGt3StzM8="
         }
       ]
     },
     {
       "Route": "_framework/BlazorSportStoreAuth.wasm.gz",
-      "AssetFile": "C:\\Users\\joero\\source\\repos\\BlazorSportStoreAuthNew\\obj\\Debug\\net8.0\\compressed\\t8u1ly7gw3-drbltthygi.gz",
+      "AssetFile": "C:\\Users\\joero\\source\\repos\\BlazorSportStoreAuthNew\\obj\\Debug\\net8.0\\compressed\\t8u1ly7gw3-04k947j19d.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -23240,7 +23240,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "42560"
+          "Value": "42501"
         },
         {
           "Name": "Content-Type",
@@ -23248,11 +23248,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"x1kH5GSeEhnyVC/3E+Ek1ZU+Jh5PWKgKN4aHcCMK7Fo=\""
+          "Value": "\"KEz04GuQfkLWcbndUZL2/nvOu0pUyP6J5iba9ttrd3g=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 19 Feb 2025 22:52:18 GMT"
+          "Value": "Wed, 19 Feb 2025 22:57:29 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -23270,7 +23270,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-x1kH5GSeEhnyVC/3E+Ek1ZU+Jh5PWKgKN4aHcCMK7Fo="
+          "Value": "sha256-KEz04GuQfkLWcbndUZL2/nvOu0pUyP6J5iba9ttrd3g="
         }
       ]
     },
@@ -99329,7 +99329,7 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"TmdN4Ez+TFj565/GIY7XFuY1qfh+gcko39YhOOBKLo8=\""
+          "Value": "\"ruBEgGhIiV5Soxmc/C2HmU81woHorfti49vEmZd5DeE=\""
         },
         {
           "Name": "Last-Modified",
@@ -99343,7 +99343,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-TmdN4Ez+TFj565/GIY7XFuY1qfh+gcko39YhOOBKLo8="
+          "Value": "sha256-ruBEgGhIiV5Soxmc/C2HmU81woHorfti49vEmZd5DeE="
         }
       ]
     },
@@ -99366,11 +99366,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"pO9dhSAZ1xmAZN0AokiY1Mh8rGEKNpqgH0E3wU0p96k=\""
+          "Value": "\"Lrwm+LKEDcnufVpkvY8LdCd45YPqRLzx9UyZqn9rSzQ=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 19 Feb 2025 22:57:30 GMT"
+          "Value": "Wed, 19 Feb 2025 23:49:19 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -99380,7 +99380,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-pO9dhSAZ1xmAZN0AokiY1Mh8rGEKNpqgH0E3wU0p96k="
+          "Value": "sha256-Lrwm+LKEDcnufVpkvY8LdCd45YPqRLzx9UyZqn9rSzQ="
         }
       ]
     },

@@ -52,9 +52,9 @@
 
     <script>
         function updateNavMenu() {
-            console.log("🔵 Running updateNavMenu()");
+            console.log("Running updateNavMenu()");
             var userEmail = sessionStorage.getItem("userEmail");
-            console.log("📢 SessionStorage User Email: ", userEmail);
+            console.log("SessionStorage User Email: ", userEmail);
 
             var loginIcon = document.getElementById("loginIcon");
             var loginLink = document.getElementById("loginLink");
@@ -62,7 +62,7 @@
             var cartIcon = document.getElementById("cartIcon");
 
             if (!loginIcon || !loginLink || !cartCountElement || !cartIcon) {
-                console.log("⚠️ Navbar elements not found, retrying...");
+                console.log("Navbar elements not found, retrying...");
                 setTimeout(updateNavMenu, 500);
                 return;
             }

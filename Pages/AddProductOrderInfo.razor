@@ -161,55 +161,61 @@
             var orderApiUrl = "https://nice-pebble-0d420e91e.4.azurestaticapps.net/data-api/rest/OrderInfos";
             var ordersApiUrl = "https://nice-pebble-0d420e91e.4.azurestaticapps.net/data-api/rest/Orders";
 
-            // Calculate subtotal, tax, and shipping using decimal types
+            // ✅ Debugging: Print cart items
+            Console.WriteLine($"🔹 Cart contains {CartService.CartItems.Count} items");
+
+            // ✅ Ensure calculation before sending
             orderInfo.Subtotal = CartService.CartItems.Sum(item => item.Product.Price * item.Quantity);
-            orderInfo.Shipping = Math.Round(orderInfo.Subtotal * 0.05m, 0); // Convert 5% to decimal
-            orderInfo.Tax = Math.Round((orderInfo.Subtotal + orderInfo.Shipping) * 0.075m, 0); // Convert 7.5% to decimal
+            orderInfo.Shipping = Math.Round(orderInfo.Subtotal * 0.05m, 0);
+            orderInfo.Tax = Math.Round((orderInfo.Subtotal + orderInfo.Shipping) * 0.075m, 0);
             orderInfo.Total = orderInfo.Subtotal + orderInfo.Shipping + orderInfo.Tax;
+
+            // ✅ Debugging: Ensure values are correct before sending
+            Console.WriteLine($"🔹 Subtotal: {orderInfo.Subtotal}, Shipping: {orderInfo.Shipping}, Tax: {orderInfo.Tax}, Total: {orderInfo.Total}");
 
             var orderPayload = new
             {
                 order_id = generatedOrderId,
                 email = orderInfo.Email,
-                fname = orderInfo.FirstName, // Change first_name → fname
-                lname = orderInfo.LastName,  // Change last_name → lname
+                fname = orderInfo.FirstName,
+                lname = orderInfo.LastName,
                 street = orderInfo.Street,
                 city = orderInfo.City,
                 state = orderInfo.State,
                 zip = orderInfo.Zip,
-                subtotal = orderInfo.Subtotal,
-                tax = orderInfo.Tax,
-                shipping = orderInfo.Shipping,
-                total = orderInfo.Total,
+                subtotal = orderInfo.Subtotal, // ✅ Ensure this is being sent
+                tax = orderInfo.Tax,           // ✅ Ensure this is being sent
+                shipping = orderInfo.Shipping, // ✅ Ensure this is being sent
+                total = orderInfo.Total,       // ✅ Ensure this is being sent
                 status = orderInfo.Status,
                 order_date = orderInfo.OrderDate
             };
 
-            Console.WriteLine($"Sending OrderInfo to: {orderApiUrl}");
-            string jsonPayload = System.Text.Json.JsonSerializer.Serialize(orderPayload);
-            Console.WriteLine($"Final JSON Payload: {jsonPayload}");
+            Console.WriteLine($"🔹 Sending OrderInfo to: {orderApiUrl}");
+            Console.WriteLine($"🔹 JSON Payload: {System.Text.Json.JsonSerializer.Serialize(orderPayload)}");
 
             var response = await Http.PostAsJsonAsync(orderApiUrl, orderPayload);
             var responseContent = await response.Content.ReadAsStringAsync();
-            Console.WriteLine($" Order API Response: {response.StatusCode} - {responseContent}");
+            Console.WriteLine($"🔹 Order API Response: {response.StatusCode} - {responseContent}");
 
             if (response.IsSuccessStatusCode)
             {
-                Console.WriteLine($"Order Created with ID: {generatedOrderId}");
+                Console.WriteLine($"✅ Order Created with ID: {generatedOrderId}");
 
                 foreach (var item in CartService.CartItems)
                 {
                     var orderItemPayload = new
                     {
-                        order_id = generatedOrderId, // ✅ Matches API
-                        item = item.Product.Name, // ✅ "item" instead of "product_name"
-                        price = item.Product.Price, // ✅ Matches API
-                        quantity = item.Quantity, // ✅ Matches API
-                        itemTotal = item.Product.Price * item.Quantity // ✅ Matches API
+                        order_id = generatedOrderId,
+                        item = item.Product.Name,
+                        price = item.Product.Price,
+                        quantity = item.Quantity,
+                        itemTotal = item.Product.Price * item.Quantity
                     };
 
+                    Console.WriteLine($"🔹 Sending OrderItem to: {ordersApiUrl}");
+                    Console.WriteLine($"🔹 JSON Payload: {System.Text.Json.JsonSerializer.Serialize(orderItemPayload)}");
 
-                    Console.WriteLine($"🔹 Sending OrderItem to: {ordersApiUrl} - {System.Text.Json.JsonSerializer.Serialize(orderItemPayload)}");
                     var itemResponse = await Http.PostAsJsonAsync(ordersApiUrl, orderItemPayload);
                     var itemResponseContent = await itemResponse.Content.ReadAsStringAsync();
                     Console.WriteLine($"🔹 OrderItem API Response: {itemResponse.StatusCode} - {itemResponseContent}");
@@ -220,11 +226,13 @@
                     }
                 }
 
-                CartService.CartItems.Clear(); //new
-                await LocalStorage.RemoveItemAsync("cartItems"); //new
-                StateHasChanged(); //new
+                // ✅ Clear Cart and Update UI
+                CartService.CartItems.Clear();
+                await LocalStorage.RemoveItemAsync("cartItems");
+                await JsRuntime.InvokeVoidAsync("updateCartCount", 0);
+                StateHasChanged();
+
                 await JsRuntime.InvokeVoidAsync("alert", $"Your Order has been placed. Your Order ID is - {generatedOrderId}");
-                await JsRuntime.InvokeVoidAsync("updateCartCount", 0); // ✅ Reset Cart Count in UI
                 NavigationManager.NavigateTo("/");
             }
             else

@@ -165,8 +165,8 @@
             {
                 order_id = generatedOrderId,
                 email = orderInfo.Email,
-                first_name = orderInfo.FirstName,
-                last_name = orderInfo.LastName,
+                fname = orderInfo.FirstName, // Change first_name → fname
+                lname = orderInfo.LastName,  // Change last_name → lname
                 street = orderInfo.Street,
                 city = orderInfo.City,
                 state = orderInfo.State,
@@ -192,12 +192,13 @@
                 {
                     var orderItemPayload = new
                     {
-                        order_id = generatedOrderId,
-                        item = item.Product.Name,
-                        price = item.Product.Price,
-                        quantity = item.Quantity,
-                        itemTotal = item.Product.Price * item.Quantity
+                        order_id = generatedOrderId, // ✅ Matches API
+                        item = item.Product.Name, // ✅ "item" instead of "product_name"
+                        price = item.Product.Price, // ✅ Matches API
+                        quantity = item.Quantity, // ✅ Matches API
+                        itemTotal = item.Product.Price * item.Quantity // ✅ Matches API
                     };
+
 
                     Console.WriteLine($"🔹 Sending OrderItem to: {ordersApiUrl} - {System.Text.Json.JsonSerializer.Serialize(orderItemPayload)}");
                     var itemResponse = await Http.PostAsJsonAsync(ordersApiUrl, orderItemPayload);

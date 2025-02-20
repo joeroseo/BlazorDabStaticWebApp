@@ -161,6 +161,12 @@
             var orderApiUrl = "https://nice-pebble-0d420e91e.4.azurestaticapps.net/data-api/rest/OrderInfos";
             var ordersApiUrl = "https://nice-pebble-0d420e91e.4.azurestaticapps.net/data-api/rest/Orders";
 
+            // Calculate subtotal, tax, and shipping using decimal types
+            orderInfo.Subtotal = CartService.CartItems.Sum(item => item.Product.Price * item.Quantity);
+            orderInfo.Shipping = Math.Round(orderInfo.Subtotal * 0.05m, 0); // Convert 5% to decimal
+            orderInfo.Tax = Math.Round((orderInfo.Subtotal + orderInfo.Shipping) * 0.075m, 0); // Convert 7.5% to decimal
+            orderInfo.Total = orderInfo.Subtotal + orderInfo.Shipping + orderInfo.Tax;
+
             var orderPayload = new
             {
                 order_id = generatedOrderId,
@@ -218,6 +224,7 @@
                 await LocalStorage.RemoveItemAsync("cartItems"); //new
                 StateHasChanged(); //new
                 await JsRuntime.InvokeVoidAsync("alert", $"Your Order has been placed. Your Order ID is - {generatedOrderId}");
+                await JsRuntime.InvokeVoidAsync("updateCartCount", 0); // ✅ Reset Cart Count in UI
                 NavigationManager.NavigateTo("/");
             }
             else

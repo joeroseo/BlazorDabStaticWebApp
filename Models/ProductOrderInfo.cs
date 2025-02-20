@@ -1,12 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization; // ✅ Ensure this is included
 
 namespace BlazorSportStoreAuth.Models
 {
     [Table("ProductOrderInfos")] // ✅ Ensure correct table mapping
-
-
-
     public class ProductOrderInfo
     {
         [Key]
@@ -16,9 +14,11 @@ namespace BlazorSportStoreAuth.Models
         public string Email { get; set; }
 
         [Required]
+        [JsonPropertyName("fname")] // ✅ Ensures it serializes as "fname"
         public string FirstName { get; set; }
 
         [Required]
+        [JsonPropertyName("lname")] // ✅ Ensures it serializes as "lname"
         public string LastName { get; set; }
 
         [Required]
@@ -42,6 +42,7 @@ namespace BlazorSportStoreAuth.Models
         public string order_id { get; set; }
 
         [Required]
-        public string OrderDate { get; set; } // Ensure this property is added
+        [JsonPropertyName("order_date")] // ✅ Ensures it serializes as "order_date"
+        public string OrderDate { get; set; }
     }
 }

@@ -151,7 +151,7 @@
 
     protected async Task SaveOrderInfo()
     {
-        Console.WriteLine("🚀 SaveOrderInfo() started");
+        Console.WriteLine("SaveOrderInfo() started");
 
         isLoading = true;
         errorMessage = "";
@@ -179,17 +179,17 @@
                 order_date = orderInfo.OrderDate
             };
 
-            Console.WriteLine($"🔹 Sending OrderInfo to: {orderApiUrl}");
+            Console.WriteLine($"Sending OrderInfo to: {orderApiUrl}");
             string jsonPayload = System.Text.Json.JsonSerializer.Serialize(orderPayload);
-            Console.WriteLine($"🔹 Final JSON Payload: {jsonPayload}");
+            Console.WriteLine($"Final JSON Payload: {jsonPayload}");
 
             var response = await Http.PostAsJsonAsync(orderApiUrl, orderPayload);
             var responseContent = await response.Content.ReadAsStringAsync();
-            Console.WriteLine($"🔹 Order API Response: {response.StatusCode} - {responseContent}");
+            Console.WriteLine($" Order API Response: {response.StatusCode} - {responseContent}");
 
             if (response.IsSuccessStatusCode)
             {
-                Console.WriteLine($"✅ Order Created with ID: {generatedOrderId}");
+                Console.WriteLine($"Order Created with ID: {generatedOrderId}");
 
                 foreach (var item in CartService.CartItems)
                 {

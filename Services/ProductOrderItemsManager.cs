@@ -16,8 +16,9 @@ namespace BlazorSportStoreAuth.Services
         public ProductOrderItemsManager(HttpClient httpClient, ApiSettings apiSettings)
         {
             _httpClient = httpClient;
-            _apiBaseUrl = $"{apiSettings.BaseUrl}ProductOrderItems"; // ✅ Match API call format of Page 1
+            _apiBaseUrl = $"{apiSettings.BaseUrl}data-api/rest/Orders"; // ✅ Fix API path
         }
+
 
         public async Task<List<ProductOrderItems>> GetProductOrderItems()
         {

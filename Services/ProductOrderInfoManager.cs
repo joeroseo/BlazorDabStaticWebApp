@@ -1,4 +1,4 @@
-using BlazorSportStoreAuth.Interfaces;
+﻿using BlazorSportStoreAuth.Interfaces;
 using BlazorSportStoreAuth.Models;
 using System;
 using System.Collections.Generic;
@@ -16,8 +16,9 @@ namespace BlazorSportStoreAuth.Services
         public ProductOrderInfoManager(HttpClient httpClient, ApiSettings apiSettings)
         {
             _httpClient = httpClient;
-            _apiBaseUrl = $"{apiSettings.BaseUrl}OrderInfos"; // Dynamically set base API URL
+            _apiBaseUrl = $"{apiSettings.BaseUrl}OrderInfos"; // ✅ Ensure this is correct
         }
+
 
         public async Task<List<OrderInfo>> GetOrderInfos()
         {

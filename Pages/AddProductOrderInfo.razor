@@ -136,7 +136,17 @@
     {
         generatedOrderId = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds().ToString();
         orderInfo.order_id = generatedOrderId;
+
+        // Set default values
+        orderInfo.Email = "joerosejax@gmail.com";
+        orderInfo.FirstName = "Joe";
+        orderInfo.LastName = "OConnor";
+        orderInfo.Street = "144 Castlegate Ln";
+        orderInfo.City = "St Johns";
+        orderInfo.State = "FL";
+        orderInfo.Zip = "32259";
         orderInfo.OrderDate = DateTime.Now.ToString("MM/dd/yyyy");
+        orderInfo.Status = "pending";
     }
 
     protected async Task SaveOrderInfo()
@@ -146,30 +156,73 @@
 
         try
         {
-            var orderPayload = new { order_id = generatedOrderId, email = orderInfo.Email, fname = orderInfo.FirstName, lname = orderInfo.LastName, street = orderInfo.Street, city = orderInfo.City, state = orderInfo.State, zip = orderInfo.Zip, subtotal = orderInfo.Subtotal, tax = orderInfo.Tax, shipping = orderInfo.Shipping, total = orderInfo.Total, status = orderInfo.Status, order_date = orderInfo.OrderDate };
-            var orderApiUrl = new Uri("https://nice-pebble-0d420e91e.4.azurestaticapps.net/data-api/rest/OrderInfos");
+            var orderApiUrl = "https://nice-pebble-0d420e91e.4.azurestaticapps.net/data-api/rest/OrderInfos";
+            var ordersApiUrl = "https://nice-pebble-0d420e91e.4.azurestaticapps.net/data-api/rest/Orders";
+
+            var orderPayload = new
+            {
+                order_id = generatedOrderId,
+                email = orderInfo.Email,
+                first_name = orderInfo.FirstName,
+                last_name = orderInfo.LastName,
+                street = orderInfo.Street,
+                city = orderInfo.City,
+                state = orderInfo.State,
+                zip = orderInfo.Zip,
+                subtotal = orderInfo.Subtotal,
+                tax = orderInfo.Tax,
+                shipping = orderInfo.Shipping,
+                total = orderInfo.Total,
+                status = orderInfo.Status,
+                order_date = orderInfo.OrderDate
+            };
+
             var response = await Http.PostAsJsonAsync(orderApiUrl, orderPayload);
+            var responseContent = await response.Content.ReadAsStringAsync();
 
             if (response.IsSuccessStatusCode)
             {
+                Console.WriteLine($"✅ Order Created with ID: {generatedOrderId}");
+
                 foreach (var item in CartService.CartItems)
                 {
-                    var orderItemPayload = new { order_id = generatedOrderId, item = item.Product.Name, price = item.Product.Price, quantity = item.Quantity, itemTotal = item.Product.Price * item.Quantity };
-                    await Http.PostAsJsonAsync("https://nice-pebble-0d420e91e.4.azurestaticapps.net/data-api/rest/Orders", orderItemPayload);
+                    var orderItemPayload = new
+                    {
+                        order_id = generatedOrderId,
+                        item = item.Product.Name,
+                        price = item.Product.Price,
+                        quantity = item.Quantity,
+                        itemTotal = item.Product.Price * item.Quantity
+                    };
+
+                    var itemResponse = await Http.PostAsJsonAsync(ordersApiUrl, orderItemPayload);
+                    var itemResponseContent = await itemResponse.Content.ReadAsStringAsync();
+
+                    if (!itemResponse.IsSuccessStatusCode)
+                    {
+                        errorMessage += $"\n❌ Failed to add order item: {itemResponse.StatusCode}, Content: {itemResponseContent}";
+                    }
                 }
+
                 CartService.CartItems.Clear();
+
+                // Show order confirmation popup
                 await JsRuntime.InvokeVoidAsync("alert", $"Your Order has been placed. Your Order ID is - {generatedOrderId}");
+
+                // Redirect to the home page after the user clicks "OK"
                 NavigationManager.NavigateTo("/");
             }
             else
             {
-                errorMessage = $"❌ Failed to create order. {await response.Content.ReadAsStringAsync()}";
+                errorMessage = $"❌ Failed to create order. Response: {response.StatusCode}, Content: {responseContent}";
             }
         }
         catch (Exception ex)
         {
             errorMessage = $"❌ Error saving order: {ex.Message}";
         }
+
         isLoading = false;
     }
 }
+

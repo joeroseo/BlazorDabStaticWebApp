@@ -180,6 +180,9 @@
             };
 
             Console.WriteLine($"🔹 Sending OrderInfo to: {orderApiUrl}");
+            string jsonPayload = System.Text.Json.JsonSerializer.Serialize(orderPayload);
+            Console.WriteLine($"🔹 Final JSON Payload: {jsonPayload}");
+
             var response = await Http.PostAsJsonAsync(orderApiUrl, orderPayload);
             var responseContent = await response.Content.ReadAsStringAsync();
             Console.WriteLine($"🔹 Order API Response: {response.StatusCode} - {responseContent}");

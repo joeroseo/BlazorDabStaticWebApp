@@ -38,10 +38,6 @@
                 <label>City:</label>
                 <InputText class="form-control input-wide" @bind-Value="orderInfo.City" />
             </div>
-            <div class="form-group">
-                <label>Order Date:</label>
-                <InputText class="form-control input-wide" @bind-Value="orderInfo.OrderDate" readonly />
-            </div>
             <div class="form-group-inline">
                 <div class="input-wrapper">
                     <label>State:</label>
@@ -66,11 +62,11 @@
         </div>
         <div class="form-group">
             <label>Expiration:</label>
-            <InputDate class="form-control" @bind-Value="expirationDate" TValue="DateTime" />
+            <InputDate class="form-control input-wide" @bind-Value="expirationDate" TValue="DateTime" />
         </div>
         <div class="form-group">
             <label>CVC:</label>
-            <InputText class="form-control" @bind-Value="cvc" />
+            <InputText class="form-control input-wide" @bind-Value="cvc" />
         </div>
     </div>
 </div>
@@ -140,16 +136,7 @@
     {
         generatedOrderId = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds().ToString();
         orderInfo.order_id = generatedOrderId;
-        orderInfo.OrderDate = DateTime.Now.ToString("MM/dd/yyyy"); // Set Order Date
-
-        // Set default values
-        orderInfo.Email = "joerosejax@gmail.com";
-        orderInfo.FirstName = "Joe";
-        orderInfo.LastName = "OConnor";
-        orderInfo.Street = "144 Castlegate Ln";
-        orderInfo.City = "St Johns";
-        orderInfo.State = "FL";
-        orderInfo.Zip = "32259";
+        orderInfo.OrderDate = DateTime.Now.ToString("MM/dd/yyyy");
     }
 
     protected async Task SaveOrderInfo()
@@ -159,54 +146,19 @@
 
         try
         {
-            var orderPayload = new
-            {
-                order_id = generatedOrderId,
-                email = orderInfo.Email,
-                fname = orderInfo.FirstName,
-                lname = orderInfo.LastName,
-                street = orderInfo.Street,
-                city = orderInfo.City,
-                state = orderInfo.State,
-                zip = orderInfo.Zip,
-                subtotal = orderInfo.Subtotal,
-                tax = orderInfo.Tax,
-                shipping = orderInfo.Shipping,
-                total = orderInfo.Total,
-                status = orderInfo.Status,
-                order_date = orderInfo.OrderDate // Include Order Date
-            };
-
-            // Use an absolute URL to ensure correctness
-            var orderApiUrl = new Uri(Http.BaseAddress, "rest/OrderInfos");
-
+            var orderPayload = new { order_id = generatedOrderId, email = orderInfo.Email, fname = orderInfo.FirstName, lname = orderInfo.LastName, street = orderInfo.Street, city = orderInfo.City, state = orderInfo.State, zip = orderInfo.Zip, subtotal = orderInfo.Subtotal, tax = orderInfo.Tax, shipping = orderInfo.Shipping, total = orderInfo.Total, status = orderInfo.Status, order_date = orderInfo.OrderDate };
+            var orderApiUrl = new Uri("https://nice-pebble-0d420e91e.4.azurestaticapps.net/data-api/rest/Products");
             var response = await Http.PostAsJsonAsync(orderApiUrl, orderPayload);
 
             if (response.IsSuccessStatusCode)
             {
-                Console.WriteLine($"✅ Order Created with ID: {generatedOrderId}");
-
                 foreach (var item in CartService.CartItems)
                 {
-                    var orderItemPayload = new
-                    {
-                        order_id = generatedOrderId,
-                        item = item.Product.Name,
-                        price = item.Product.Price,
-                        quantity = item.Quantity,
-                        itemTotal = item.Product.Price * item.Quantity
-                    };
-
-                    var orderItemApiUrl = new Uri(Http.BaseAddress, "rest/Orders");
-                    await Http.PostAsJsonAsync(orderItemApiUrl, orderItemPayload);
+                    var orderItemPayload = new { order_id = generatedOrderId, item = item.Product.Name, price = item.Product.Price, quantity = item.Quantity, itemTotal = item.Product.Price * item.Quantity };
+                    await Http.PostAsJsonAsync("https://nice-pebble-0d420e91e.4.azurestaticapps.net/data-api/rest/OrderItems", orderItemPayload);
                 }
-
                 CartService.CartItems.Clear();
-
-                // Show order confirmation popup
                 await JsRuntime.InvokeVoidAsync("alert", $"Your Order has been placed. Your Order ID is - {generatedOrderId}");
-
-                // Redirect to the home page after the user clicks "OK"
                 NavigationManager.NavigateTo("/");
             }
             else
@@ -218,8 +170,6 @@
         {
             errorMessage = $"❌ Error saving order: {ex.Message}";
         }
-
         isLoading = false;
     }
-
 }

@@ -1,15 +1,12 @@
 /*
 Create the free database in azure the username abd password are those of the SQL machine
-In DBeaver create a connection String ait will initially connect to the master database
+In DBeaver create a connection String it will initially connect to the master database
 Right click on that and open a SQL editor window
-Run the scripts below ..
+Run the scripts below:  Schema will not show up until after a table is added
 */ 
 
 
-
 Create Schema BlazorSportsStore.dbo;
-
-
 
 CREATE TABLE BlazorSportsStore.dbo.Users (
 	Id int IDENTITY(1,1) NOT NULL,
@@ -19,7 +16,6 @@ CREATE TABLE BlazorSportsStore.dbo.Users (
 	CONSTRAINT PK__Users__3214EC072CA915AE PRIMARY KEY (Id),
 	CONSTRAINT UQ__Users__A9D1053455645121 UNIQUE (Email)
 );
-
 
 CREATE TABLE BlazorSportsStore.dbo.carts (
 	id int IDENTITY(1,1) NOT NULL,
@@ -58,7 +54,7 @@ CREATE TABLE BlazorSportsStore.dbo.orders (
 	CONSTRAINT PK__orders__3213E83FB8070A5E PRIMARY KEY (id)
 );
 
-CREATE TABLE BlazorBlazorSportsStore.dbo.products (
+CREATE TABLE BlazorSportsStore.dbo.products (
 	id int IDENTITY(1,1) NOT NULL,
 	name varchar(25) COLLATE SQL_Latin1_General_CP1_CI_AS DEFAULT 'yes' NOT NULL,
 	price int NOT NULL,
@@ -66,9 +62,9 @@ CREATE TABLE BlazorBlazorSportsStore.dbo.products (
 	[image] varchar(255) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
 	isAvailable bit DEFAULT 1 NULL,
 	CONSTRAINT PK_products PRIMARY KEY (id)
-)
+);
 
-INSERT INTO BlazorBlazorSportsStore.dbo.products (name,price,category,[image],isAvailable) VALUES
+INSERT INTO BlazorSportsStore.dbo.products (name,price,category,[image],isAvailable) VALUES
 	 (N'BaseBall',270,N'BaseBall',N'/img/uploads/BaseBall.jpg',1),
 	 (N'Bat',220,N'BaseBall',N'/img/uploads/Bat.jpg',1),
 	 (N'BaseballGlove',220,N'Baseba1l',N'/img/uploads/BaseBallGlove.jpg',1),
@@ -79,7 +75,7 @@ INSERT INTO BlazorBlazorSportsStore.dbo.products (name,price,category,[image],is
 	 (N'FootballCleats',70,N'Football',N'/img/uploads/FootballCleats.jpg',1),
 	 (N'FootballHelment',40,N'Football',N'/img/uploads/FootballHelment.jpg',1),
 	 (N'GolfBag',270,N'Golf',N'/img/uploads/GolfBag.jpg',1);
-INSERT INTO BlazorBlazorSportsStore.dbo.products (name,price,category,[image],isAvailable) VALUES
+INSERT INTO BlazorSportsStore.dbo.products (name,price,category,[image],isAvailable) VALUES
 	 (N'GolfBalls',270,N'Golf',N'/img/uploads/GolfBalls.jpg',1),
 	 (N'GolfGlove',270,N'Golf',N'/img/uploads/GolfGlove.jpg',1),
 	 (N'SoccerGoal',50,N'Soccer',N'/img/uploads/SoccerGoal.jpg',1),
@@ -89,3 +85,4 @@ INSERT INTO BlazorBlazorSportsStore.dbo.products (name,price,category,[image],is
 	 (N'TennisRacket',180,N'Tennis',N'/img/uploads/TennisRacket.jpg',1),
 	 (N'TennisBalls',30,N'Tennis',N'/img/uploads/TennisBalls.jpg',1),
 	 (N'TennisBagLarge',180,N'Tennis',N'/img/uploads/TennisBag.jpg',1);
+

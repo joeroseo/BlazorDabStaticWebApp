@@ -16,15 +16,14 @@ namespace BlazorSportStoreAuth.Services
         public ProductOrderInfoManager(HttpClient httpClient, ApiSettings apiSettings)
         {
             _httpClient = httpClient;
-            _apiBaseUrl = $"{apiSettings.BaseUrl}OrderInfos"; // ✅ Ensure this is correct
+            _apiBaseUrl = $"{apiSettings.BaseUrl}OrderInfos";
         }
 
-
-        public async Task<List<OrderInfo>> GetOrderInfos()
+        public async Task<List<ProductOrderInfo>> GetOrderInfos()
         {
             try
             {
-                return await _httpClient.GetFromJsonAsync<List<OrderInfo>>(_apiBaseUrl);
+                return await _httpClient.GetFromJsonAsync<List<ProductOrderInfo>>(_apiBaseUrl);
             }
             catch (Exception ex)
             {
@@ -32,15 +31,15 @@ namespace BlazorSportStoreAuth.Services
             }
         }
 
-        public async Task<int> AddOrderInfo(OrderInfo orderInfo)
+        public async Task<int> AddOrderInfo(ProductOrderInfo orderInfo)
         {
             try
             {
                 var response = await _httpClient.PostAsJsonAsync(_apiBaseUrl, orderInfo);
                 if (response.IsSuccessStatusCode)
                 {
-                    var createdOrder = await response.Content.ReadFromJsonAsync<OrderInfo>();
-                    return createdOrder.OrderId;
+                    var createdOrder = await response.Content.ReadFromJsonAsync<ProductOrderInfo>();
+                    return createdOrder.Id;
                 }
                 else
                 {
@@ -53,11 +52,11 @@ namespace BlazorSportStoreAuth.Services
             }
         }
 
-        public async Task UpdateOrderInfoDetails(OrderInfo orderInfo)
+        public async Task UpdateOrderInfoDetails(ProductOrderInfo orderInfo)
         {
             try
             {
-                var response = await _httpClient.PutAsJsonAsync($"{_apiBaseUrl}/{orderInfo.OrderId}", orderInfo);
+                var response = await _httpClient.PutAsJsonAsync($"{_apiBaseUrl}/{orderInfo.Id}", orderInfo);
                 if (!response.IsSuccessStatusCode)
                 {
                     throw new Exception("Error updating order in API.");
@@ -69,11 +68,11 @@ namespace BlazorSportStoreAuth.Services
             }
         }
 
-        public async Task<OrderInfo> GetOrderInfoData(int orderId)
+        public async Task<ProductOrderInfo> GetOrderInfoData(int orderId)
         {
             try
             {
-                return await _httpClient.GetFromJsonAsync<OrderInfo>($"{_apiBaseUrl}/{orderId}");
+                return await _httpClient.GetFromJsonAsync<ProductOrderInfo>($"{_apiBaseUrl}/{orderId}");
             }
             catch (Exception ex)
             {

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BlazorSportStoreAuth")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+eed5bccf59083700b36e6bb1daa0f251210b2344")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+45f0684894b9de5ca78063192a3003978e4cd71d")]
 [assembly: System.Reflection.AssemblyProductAttribute("BlazorSportStoreAuth")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BlazorSportStoreAuth")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -6,10 +6,10 @@ namespace BlazorSportStoreAuth.Interfaces
 {
     public interface IProductOrderInfo
     {
-        Task<List<OrderInfo>> GetOrderInfos();
-        Task<int> AddOrderInfo(OrderInfo orderInfo);
-        Task UpdateOrderInfoDetails(OrderInfo orderInfo);
-        Task<OrderInfo> GetOrderInfoData(int orderId);
+        Task<List<ProductOrderInfo>> GetOrderInfos();
+        Task<int> AddOrderInfo(ProductOrderInfo orderInfo);
+        Task UpdateOrderInfoDetails(ProductOrderInfo orderInfo);
+        Task<ProductOrderInfo> GetOrderInfoData(int orderId);
         Task DeleteOrderInfo(int orderId);
     }
 }

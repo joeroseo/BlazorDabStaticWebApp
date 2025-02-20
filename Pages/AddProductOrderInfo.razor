@@ -151,6 +151,8 @@
 
     protected async Task SaveOrderInfo()
     {
+        Console.WriteLine("🚀 SaveOrderInfo() started");
+
         isLoading = true;
         errorMessage = "";
 
@@ -177,8 +179,10 @@
                 order_date = orderInfo.OrderDate
             };
 
+            Console.WriteLine($"🔹 Sending OrderInfo to: {orderApiUrl}");
             var response = await Http.PostAsJsonAsync(orderApiUrl, orderPayload);
             var responseContent = await response.Content.ReadAsStringAsync();
+            Console.WriteLine($"🔹 Order API Response: {response.StatusCode} - {responseContent}");
 
             if (response.IsSuccessStatusCode)
             {
@@ -195,8 +199,10 @@
                         itemTotal = item.Product.Price * item.Quantity
                     };
 
+                    Console.WriteLine($"🔹 Sending OrderItem to: {ordersApiUrl} - {System.Text.Json.JsonSerializer.Serialize(orderItemPayload)}");
                     var itemResponse = await Http.PostAsJsonAsync(ordersApiUrl, orderItemPayload);
                     var itemResponseContent = await itemResponse.Content.ReadAsStringAsync();
+                    Console.WriteLine($"🔹 OrderItem API Response: {itemResponse.StatusCode} - {itemResponseContent}");
 
                     if (!itemResponse.IsSuccessStatusCode)
                     {
@@ -205,11 +211,7 @@
                 }
 
                 CartService.CartItems.Clear();
-
-                // Show order confirmation popup
                 await JsRuntime.InvokeVoidAsync("alert", $"Your Order has been placed. Your Order ID is - {generatedOrderId}");
-
-                // Redirect to the home page after the user clicks "OK"
                 NavigationManager.NavigateTo("/");
             }
             else
@@ -222,7 +224,9 @@
             errorMessage = $"❌ Error saving order: {ex.Message}";
         }
 
+        Console.WriteLine("🚀 SaveOrderInfo() finished");
         isLoading = false;
     }
+
 }
 

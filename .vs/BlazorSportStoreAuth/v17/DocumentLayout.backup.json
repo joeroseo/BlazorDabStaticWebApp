@@ -49,6 +49,10 @@
           "SelectedChildIndex": 3,
           "Children": [
             {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "ProductOrderItemsManager.cs",
@@ -75,17 +79,13 @@
               "EditorCaption": ""
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
-            },
-            {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "AddProductOrderInfo.razor",
               "DocumentMoniker": "C:\\Users\\joero\\source\\repos\\BlazorSportStoreAuthNew\\Pages\\AddProductOrderInfo.razor",
               "RelativeDocumentMoniker": "Pages\\AddProductOrderInfo.razor",
-              "ToolTip": "C:\\Users\\joero\\source\\repos\\BlazorSportStoreAuthNew\\Pages\\AddProductOrderInfo.razor*",
-              "RelativeToolTip": "Pages\\AddProductOrderInfo.razor*",
+              "ToolTip": "C:\\Users\\joero\\source\\repos\\BlazorSportStoreAuthNew\\Pages\\AddProductOrderInfo.razor",
+              "RelativeToolTip": "Pages\\AddProductOrderInfo.razor",
               "ViewState": "AgIAANsAAAAAAAAAAAAcwOMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-02-20T00:36:50.972Z",

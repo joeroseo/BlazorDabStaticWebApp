@@ -1,5 +1,5 @@
 self.assetsManifest = {
-  "version": "Z1vyIWvz",
+  "version": "19+rc7f7",
   "assets": [
     {
       "hash": "sha256-w7fwYK8reUM3FqeJR820FVuZLdiStSV+ZLv0CRkLEOw=",
@@ -22,11 +22,11 @@ self.assetsManifest = {
       "url": "_framework/Azure.Identity.wasm"
     },
     {
-      "hash": "sha256-3CxN98PPcMxWNxsuBK+D0nJZgSs937nqXt7QPYTWcQU=",
+      "hash": "sha256-HJ6/9yErn2AruSdfXRv1gk3Z5b2eWjJd9pDkVtk1bi0=",
       "url": "_framework/BlazorSportStoreAuth.pdb"
     },
     {
-      "hash": "sha256-ZTs/rC2CVfAB2VJVknmAULky3E79h76z0mf9EeXtRbw=",
+      "hash": "sha256-ErsobdbSELon5as7H+5geGQBTe5yIzJ4ELaTBJkIuLs=",
       "url": "_framework/BlazorSportStoreAuth.wasm"
     },
     {
@@ -974,7 +974,7 @@ self.assetsManifest = {
       "url": "_framework/WindowsBase.wasm"
     },
     {
-      "hash": "sha256-vnKsWWbZ9o9OesmO/8mXMyc5x9jV9ajhCEMDWVrnRSg=",
+      "hash": "sha256-W5WN/+0uQFZSKebtwZ4gXhNhlLcDUcJecOrrVIex2gs=",
       "url": "_framework/blazor.boot.json"
     },
     {

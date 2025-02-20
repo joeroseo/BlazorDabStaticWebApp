@@ -5,80 +5,79 @@
 @inject CartService CartService
 @inject NavigationManager NavigationManager
 
-<h1>Shopping Cart</h1>
+<h1 class="text-center my-4">Shopping Cart</h1>
 
 @if (CartService.CartItems.Count == 0)
 {
-    <p>Your cart is empty.</p>
+    <div class="text-center p-4 border rounded bg-light">
+        <p class="text-muted">Your cart is empty.</p>
+    </div>
 }
 else
 {
-    <div class="flex-container">
-        <!-- Order Items -->
-        <div class="flex-child" style="border: 0.5px solid #d3d3d3">
-            <div style="margin-left: 1px">
-                @if (CartService.CartItems.Any())
-                {
-                    <h4>Order Items</h4>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Item</th>
-                                <th>Description</th>
-                                <th>Price</th>
-                                <th>Quantity</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in CartService.CartItems)
-                            {
+    <div class="container">
+        <div class="row">
+            <!-- Order Items -->
+            <div class="col-md-8">
+                <div class="card shadow-sm p-3 mb-4">
+                    <h4 class="mb-3">Order Items</h4>
+                    @if (CartService.CartItems.Any())
+                    {
+                        <table class="table table-striped">
+                            <thead>
                                 <tr>
-                                    <td><img src="@item.Product.Image" class="img-fluid rounded-3" alt="Shopping item" style="width: 100px; padding-left: 20px" /></td>
-                                    <td>@item.Product.Name</td>
-                                    <td>@item.Product.Price.ToString("C0")</td>
-                                    <td>@item.Quantity</td>
+                                    <th>Item</th>
+                                    <th>Description</th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>
                                 </tr>
-                            }
-                        </tbody>
-                    </table>
-                }
-                else
-                {
-                    <p>No items found in the order.</p>
-                }
+                            </thead>
+                            <tbody>
+                                @foreach (var item in CartService.CartItems)
+                                {
+                                    <tr>
+                                        <td><img src="@item.Product.Image" class="img-thumbnail" alt="Shopping item" style="width: 80px;" /></td>
+                                        <td>@item.Product.Name</td>
+                                        <td>@item.Product.Price.ToString("C0")</td>
+                                        <td>@item.Quantity</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                    else
+                    {
+                        <p class="text-muted">No items found in the order.</p>
+                    }
+                </div>
             </div>
-        </div>
 
-        <!-- Order Details -->
-        <div class="flex-child" style="border: 0.5px solid #d3d3d3">
-            <div class="col-lg-12">
-                <div class="card rounded-0 border-0">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center mb-4">
-                            <h5 class="mb-0">Order Details</h5>
-                        </div>
-                        <hr class="my-2" />
-                        <div class="d-flex justify-content-between">
-                            <p class="mb-2">Subtotal</p>
-                            <p class="mb-2"><i class="bi bi-currency-dollar"></i>@cartTotal.ToString("C0")</p>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <p class="mb-2">Tax</p>
-                            <p class="mb-2"><i class="bi bi-currency-dollar"></i>@Math.Round(cartTotal * 0.075m, 0).ToString("C0")</p>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <p class="mb-2">Shipping</p>
-                            <p class="mb-2"><i class="bi bi-currency-dollar"></i>@Math.Round(cartTotal * 0.05m, 0).ToString("C0")</p>
-                        </div>
-                        <div class="d-flex justify-content-between mb-4">
-                            <p class="mb-2">Total</p>
-                            <p class="mb-2"><i class="bi bi-currency-dollar"></i>@Math.Round(cartTotal * 1.125m, 0).ToString("C0")</p>
-                        </div>
-                        <br />
-                        <br />
+            <!-- Order Details -->
+            <div class="col-md-4">
+                <div class="card shadow-sm p-3">
+                    <h5 class="mb-3">Order Summary</h5>
+                    <hr>
+                    <div class="d-flex justify-content-between">
+                        <p>Subtotal:</p>
+                        <p>@cartTotal.ToString("C0")</p>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <p>Tax:</p>
+                        <p>@Math.Round(cartTotal * 0.075m, 0).ToString("C0")</p>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <p>Shipping:</p>
+                        <p>@Math.Round(cartTotal * 0.05m, 0).ToString("C0")</p>
+                    </div>
+                    <hr>
+                    <div class="d-flex justify-content-between font-weight-bold">
+                        <p>Total:</p>
+                        <p>@Math.Round(cartTotal * 1.125m, 0).ToString("C0")</p>
+                    </div>
+                    <div class="text-center mt-4">
                         @if (CartService.CartItems.Count > 0)
                         {
-                            <div><a class="btn btn-primary" @onclick="Checkout">Add Order</a></div>
+                            <button class="btn btn-primary w-100" @onclick="Checkout">Proceed to Checkout</button>
                         }
                     </div>
                 </div>
@@ -100,45 +99,18 @@ else
         cartTotal = CartService.GetCartTotal();
     }
 }
+
 <style>
     body {
         font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        min-height: 100vh;
-        background-color: #f4f4f4;
+        background-color: #f8f9fa;
     }
 
-    .flex-container {
-        display: flex;
-        justify-content: space-between;
-        margin: 50px;
-        gap: 30px;
+    .card {
+        border-radius: 10px;
     }
 
-    .flex-child {
-        flex: 1;
-        border: 1px solid #d3d3d3;
-        padding: 10px;
-        background-color: #ffffff;
+    table th, table td {
+        vertical-align: middle;
     }
-
-    table {
-        width: 100%;
-        border-collapse: collapse;
-    }
-
-    th, td {
-        padding: 8px;
-        border-bottom: 1px solid #ddd;
-    }
-
-    th {
-        text-align: left;
-    }
-
-    input[type="number"] {
-        width: 60px;
-    }
-
 </style>

@@ -147,7 +147,7 @@
         try
         {
             var orderPayload = new { order_id = generatedOrderId, email = orderInfo.Email, fname = orderInfo.FirstName, lname = orderInfo.LastName, street = orderInfo.Street, city = orderInfo.City, state = orderInfo.State, zip = orderInfo.Zip, subtotal = orderInfo.Subtotal, tax = orderInfo.Tax, shipping = orderInfo.Shipping, total = orderInfo.Total, status = orderInfo.Status, order_date = orderInfo.OrderDate };
-            var orderApiUrl = new Uri("https://nice-pebble-0d420e91e.4.azurestaticapps.net/data-api/rest/Products");
+            var orderApiUrl = new Uri("https://nice-pebble-0d420e91e.4.azurestaticapps.net/data-api/rest/OrderInfos");
             var response = await Http.PostAsJsonAsync(orderApiUrl, orderPayload);
 
             if (response.IsSuccessStatusCode)
@@ -155,7 +155,7 @@
                 foreach (var item in CartService.CartItems)
                 {
                     var orderItemPayload = new { order_id = generatedOrderId, item = item.Product.Name, price = item.Product.Price, quantity = item.Quantity, itemTotal = item.Product.Price * item.Quantity };
-                    await Http.PostAsJsonAsync("https://nice-pebble-0d420e91e.4.azurestaticapps.net/data-api/rest/OrderItems", orderItemPayload);
+                    await Http.PostAsJsonAsync("https://nice-pebble-0d420e91e.4.azurestaticapps.net/data-api/rest/Orders", orderItemPayload);
                 }
                 CartService.CartItems.Clear();
                 await JsRuntime.InvokeVoidAsync("alert", $"Your Order has been placed. Your Order ID is - {generatedOrderId}");

@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "BlazorSportStoreAuth",
   "resources": {
-    "hash": "sha256-fNCW5SLziKxWjHDdLaSIKKrcjkQ2CjIhLHcW+kOPIU4=",
+    "hash": "sha256-WJt7IhhhTgEZfEf1IChdmOsjBr9kwewZoZe84UyZKzo=",
     "jsModuleNative": {
       "dotnet.native.js": "sha256-B6DNRvFeCUi3jbx9uKpuj+hV9cN0KG4RdZj1FgBZwj8="
     },
@@ -258,10 +258,10 @@
       "mscorlib.wasm": "sha256-QoC5hTKpDNO6efLnEvYwV9OJBXvYRq8/1yGhNZKiNCw=",
       "netstandard.wasm": "sha256-JT2F4bYWJpaSGq+iD0ITLpWxsDhMUjhqje9RpBtTg7w=",
       "System.Private.CoreLib.wasm": "sha256-fvIPBcvgvsRuWrKi2LGQsLYvcKUSnyIuBUsE3LJu/0Y=",
-      "BlazorSportStoreAuth.wasm": "sha256-QTkpe73QO8SPYuZeb/bKdKe7xXICsCzClLwvxm7zqy0="
+      "BlazorSportStoreAuth.wasm": "sha256-XcXTIrJVPdySJuwCE7UKyQltzLC9FPohKqwLQu576KU="
     },
     "pdb": {
-      "BlazorSportStoreAuth.pdb": "sha256-WuTYrG2Qu5v6AQyqCfOeyokBJyBpIuycGqPhpkmA4JM="
+      "BlazorSportStoreAuth.pdb": "sha256-ximTYjiQQEY6tRF1Y1Ll7XfS6YHakvqTT/iehqGrbHU="
     },
     "satelliteResources": {
       "cs": {

@@ -17,15 +17,18 @@
         <ul class="nav-list">
             <li class="nav-item"><a href="/" class="nav-link active">Home</a></li>
             <li class="nav-item"><a href="showproducts" class="nav-link">Products</a></li>
+            <li class="nav-item"><a href="products" class="nav-link">NewProducts</a></li>
         </ul>
 
         <ul class="nav-list">
+            <!-- ✅ Cart Icon with Dynamic Count -->
             <li class="nav-item cart-icon">
                 <a href="cart" class="nav-link">
-                    <i class="bi bi-cart"></i> <!-- ✅ Bootstrap Cart Icon -->
+                    <i class="bi bi-cart" id="cartIcon"></i> <!-- ✅ Bootstrap Cart Icon -->
                     <span id="cartCount" class="cart-badge">0</span> <!-- ✅ Dynamic Quantity -->
                 </a>
             </li>
+
             <li class="nav-item login-icon">
                 <a href="#" class="nav-link" id="loginLink">
                     <i class="bi bi-person" id="loginIcon"></i>
@@ -38,7 +41,7 @@
                     <i class="bi bi-list"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenu">
-                    <li><a href="ordersummary" class="dropdown-item">OrderSummary</a></li>
+                    <li><a href="ordersummary" class="dropdown-item">Order Summary</a></li>
                     <li><a href="#" class="dropdown-item">Item 2</a></li>
                     <li><a href="#" class="dropdown-item">Item 3</a></li>
                     <li><a href="#" class="dropdown-item">Item 4</a></li>
@@ -49,23 +52,31 @@
 
     <script>
         function updateNavMenu() {
-            console.log("🔵 NavMenu Loaded - Running updateNavMenu()");
+            console.log("🔵 Running updateNavMenu()");
             var userEmail = sessionStorage.getItem("userEmail");
-            console.log("📢 SessionStorage Value: ", userEmail);
+            console.log("📢 SessionStorage User Email: ", userEmail);
 
             var loginIcon = document.getElementById("loginIcon");
             var loginLink = document.getElementById("loginLink");
             var cartCountElement = document.getElementById("cartCount");
+            var cartIcon = document.getElementById("cartIcon");
 
-            if (!loginIcon || !loginLink || !cartCountElement) {
-                console.log("⚠️ Elements not found, retrying...");
+            if (!loginIcon || !loginLink || !cartCountElement || !cartIcon) {
+                console.log("⚠️ Navbar elements not found, retrying...");
                 setTimeout(updateNavMenu, 500);
                 return;
             }
 
             // ✅ Fetch cart count from sessionStorage
-            var cartCount = sessionStorage.getItem("cartCount") || 0;
+            var cartCount = sessionStorage.getItem("cartCount") || "0";
             cartCountElement.textContent = cartCount;
+
+            // ✅ Ensure cart count updates and badge is shown/hidden correctly
+            if (parseInt(cartCount) > 0) {
+                cartCountElement.style.display = "inline-block";
+            } else {
+                cartCountElement.style.display = "none";
+            }
 
             if (userEmail) {
                 console.log("✅ User is logged in:", userEmail);
@@ -77,6 +88,7 @@
                     event.preventDefault();
                     console.log("🔴 Logging out user...");
                     sessionStorage.removeItem("userEmail");
+                    sessionStorage.removeItem("cartCount"); // ✅ Clear cart count on logout
                     updateNavMenu();
                     location.reload();
                 };
@@ -86,14 +98,19 @@
                 loginIcon.classList.add("bi-person"); // ✅ Show Login icon
                 loginLink.href = "login";
             }
-
-            console.log("📢 Login Link Updated: ", loginLink.href);
         }
 
         function updateCartCount(count) {
             console.log("🛒 Updating Cart Count: " + count);
             sessionStorage.setItem("cartCount", count);
             document.getElementById("cartCount").textContent = count;
+
+            // ✅ Show/hide badge dynamically
+            if (parseInt(count) > 0) {
+                document.getElementById("cartCount").style.display = "inline-block";
+            } else {
+                document.getElementById("cartCount").style.display = "none";
+            }
         }
 
         document.addEventListener("DOMContentLoaded", function () {
@@ -127,11 +144,11 @@
         }
 
         .cart-icon {
-            margin-right: -205px; /* ✅ Move Cart Closer to the Right */
+            margin-right: -15px; /* ✅ Adjusted position */
         }
 
         .login-icon {
-            margin-right: -11px; /* ✅ Move Login Closer to the Right */
+            margin-right: -11px; /* ✅ Adjusted position */
         }
 
         .nav-link {
@@ -164,6 +181,7 @@
             position: relative;
             top: -5px;
             left: -5px;
+            display: none; /* ✅ Initially hidden */
         }
     </style>
 

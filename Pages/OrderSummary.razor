@@ -1,159 +1,119 @@
-﻿@page "/ordersummary/{OrderId}"
+﻿@page "/ordersummary"
 @using BlazorSportStoreAuth.Models
 @using Microsoft.AspNetCore.Components.Forms
-@using Blazored.LocalStorage
-@using BlazorSportStoreAuth.Services
+@using Microsoft.JSInterop
 @using BlazorSportStoreAuth.Interfaces
-@inject CartService CartService
-@inject NavigationManager NavigationManager
-@inject HttpClient Http
-@inject IJSRuntime JsRuntime
-@inject ILocalStorageService LocalStorage
 @inject IProductOrderInfo OrderInfoService
-@inject IProductOrderItems OrderItemsService
+@inject IJSRuntime JsRuntime
+@inject NavigationManager NavigationManager
 
 <h3>Order Summary</h3>
 
-<div class="flex-container">
-    <!-- Order Info -->
-    <div class="flex-child">
-        <p><strong>The Order Summary is below:</strong></p>
-        <br />
-        <div class="list">
-            @if (orderInfo != null)
+@if (isLoading)
+{
+    <p>Loading your orders...</p>
+}
+else if (orderInfos != null && orderInfos.Any())
+{
+    <table class="table is-striped is-bordered mt-2 is-fullwidth">
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Order Date</th>
+                <th>Status</th>
+                <th>Total</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var order in orderInfos)
             {
-                <p><label>Order ID:</label> @orderInfo.order_id</p>
-                <p><label>Email:</label> @orderInfo.Email</p>
-                <p><label>First Name:</label> @orderInfo.FirstName</p>
-                <p><label>Last Name:</label> @orderInfo.LastName</p>
-                <p><label>Address:</label> @orderInfo.Street</p>
-                <p><label>City:</label> @orderInfo.City</p>
-                <p><label>State:</label> @orderInfo.State</p>
-                <p><label>Zip:</label> @orderInfo.Zip</p>
-                <p><label>Order Date:</label> @orderInfo.OrderDate</p>
+                <tr>
+                    <td>@order.order_id</td>
+                    <td>@order.OrderDate</td>
+                    <td>@order.Status</td>
+                    <td><i class="bi bi-currency-dollar"></i>@order.Total.ToString("N2")</td>
+                    <td>
+                        <button class="btn-primary" @onclick="() => ViewOrderDetails(order.order_id)">View</button>
+                    </td>
+                </tr>
             }
-            else
-            {
-                <p>Loading order information...</p>
-            }
-        </div>
-    </div>
-
-    <!-- Order Details -->
-    <div class="flex-child">
-        <p><strong>The Order Details are below:</strong></p>
-        <br />
-        @if (orderInfo != null)
-        {
-            <div style="margin-right: 40px; font-size: 14px;">
-                <div class="d-flex justify-content-between">
-                    <p class="mb-2">Subtotal</p>
-                    <p class="mb-2"><i class="bi bi-currency-dollar"></i>@orderInfo.Subtotal.ToString("N2")</p>
-                </div>
-                <div class="d-flex justify-content-between">
-                    <p class="mb-2">Tax</p>
-                    <p class="mb-2"><i class="bi bi-currency-dollar"></i>@orderInfo.Tax.ToString("N2")</p>
-                </div>
-                <div class="d-flex justify-content-between">
-                    <p class="mb-2">Shipping</p>
-                    <p class="mb-2"><i class="bi bi-currency-dollar"></i>@orderInfo.Shipping.ToString("N2")</p>
-                </div>
-                <div class="d-flex justify-content-between mb-4">
-                    <p class="mb-2"><strong>Total</strong></p>
-                    <p class="mb-2"><strong><i class="bi bi-currency-dollar"></i>@orderInfo.Total.ToString("N2")</strong></p>
-                </div>
-            </div>
-
-            <table class="table is-striped is-bordered mt-2 is-fullwidth">
-                <thead>
-                    <tr>
-                        <th>Item</th>
-                        <th>Price</th>
-                        <th>Qty</th>
-                        <th style="text-align: right;">Item Total</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @if (orderItems != null && orderItems.Any())
-                    {
-                        @foreach (var item in orderItems)
-                        {
-                            <tr>
-                                <td>@item.ProductName</td>
-                                <td><i class="bi bi-currency-dollar"></i>@item.Price.ToString("N2")</td>
-                                <td>@item.Quantity</td>
-                                <td style="text-align: right;"><i class="bi bi-currency-dollar"></i>@item.ItemTotal.ToString("N2")</td>
-                            </tr>
-                        }
-                    }
-                    else
-                    {
-                        <tr><td colspan="4">No items found.</td></tr>
-                    }
-                </tbody>
-            </table>
-        }
-        else
-        {
-            <p>Loading order details...</p>
-        }
-    </div>
-</div>
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No orders found for your account.</p>
+}
 
 <style>
-    .flex-container {
-        display: flex;
-        justify-content: space-between;
-        margin: 20px;
-        gap: 30px;
-    }
-
-    .flex-child {
-        flex: 1;
-        border: 1px solid #d3d3d3;
-        padding: 10px;
-        background-color: #ffffff;
-    }
-
-    .list {
-        text-align: left;
-        max-width: 750px;
-        margin: 10px;
-    }
-
-    table {
+    .table {
         width: 100%;
-        font-size: 14px;
+        border-collapse: collapse;
     }
+
+        .table th, .table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .table th {
+            background-color: #f4f4f4;
+        }
+
+    .btn-primary {
+        background-color: #007bff;
+        border: none;
+        padding: 6px 12px;
+        font-size: 14px;
+        border-radius: 5px;
+        color: white;
+        cursor: pointer;
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
 </style>
 
 @code {
-    [Parameter]
-    public string OrderId { get; set; }
-
-    private ProductOrderInfo orderInfo;
-    private List<ProductOrderItems> orderItems = new();
+    private List<ProductOrderInfo> orderInfos = new();
+    private string userEmail = "";
+    private bool isLoading = true;
 
     protected override async Task OnInitializedAsync()
     {
-        await LoadOrderData();
+        await LoadOrdersForUser();
     }
 
-    private async Task LoadOrderData()
+    private async Task LoadOrdersForUser()
     {
         try
         {
-            var orders = await OrderInfoService.GetOrderInfos();
-            orderInfo = orders.FirstOrDefault(o => o.order_id == OrderId);
-
-            if (orderInfo != null)
+            userEmail = await JsRuntime.InvokeAsync<string>("sessionStorage.getItem", "userEmail");
+            if (string.IsNullOrEmpty(userEmail))
             {
-                orderItems = await OrderItemsService.GetProductOrderItems(orderInfo.Id);
+                NavigationManager.NavigateTo("/login");
+                return;
             }
+
+            // ✅ Fetch only the user's orders via API
+            orderInfos = await OrderInfoService.GetOrdersByUserEmail(userEmail);
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Error fetching order data: {ex.Message}");
+            Console.WriteLine($"❌ Error fetching order data: {ex.Message}");
         }
+        finally
+        {
+            isLoading = false;
+            StateHasChanged();
+        }
+    }
+
+    private void ViewOrderDetails(string orderId)
+    {
+        NavigationManager.NavigateTo($"/ordersummary/{orderId}");
     }
 }

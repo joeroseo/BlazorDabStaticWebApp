@@ -16,18 +16,34 @@ namespace BlazorSportStoreAuth.Services
         public ProductOrderInfoManager(HttpClient httpClient, ApiSettings apiSettings)
         {
             _httpClient = httpClient;
-            _apiBaseUrl = $"{apiSettings.BaseUrl}OrderInfos";
+            _apiBaseUrl = $"{apiSettings.BaseUrl}OrderInfos/"; // Ensure trailing slash
         }
 
         public async Task<List<ProductOrderInfo>> GetOrderInfos()
         {
             try
             {
-                return await _httpClient.GetFromJsonAsync<List<ProductOrderInfo>>(_apiBaseUrl);
+                var orders = await _httpClient.GetFromJsonAsync<List<ProductOrderInfo>>(_apiBaseUrl);
+                return orders ?? new List<ProductOrderInfo>(); // Ensure non-null return
             }
             catch (Exception ex)
             {
-                throw new Exception($"Error fetching orders from API: {ex.Message}");
+                Console.WriteLine($"❌ Error fetching all orders: {ex.Message}");
+                return new List<ProductOrderInfo>(); // Avoid exception crashes
+            }
+        }
+
+        public async Task<List<ProductOrderInfo>> GetOrdersByUserEmail(string email)
+        {
+            try
+            {
+                var orders = await _httpClient.GetFromJsonAsync<List<ProductOrderInfo>>($"{_apiBaseUrl}?email={email}");
+                return orders ?? new List<ProductOrderInfo>();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"❌ Error fetching orders for user {email}: {ex.Message}");
+                return new List<ProductOrderInfo>();
             }
         }
 
@@ -39,16 +55,16 @@ namespace BlazorSportStoreAuth.Services
                 if (response.IsSuccessStatusCode)
                 {
                     var createdOrder = await response.Content.ReadFromJsonAsync<ProductOrderInfo>();
-                    return createdOrder.Id;
+                    return createdOrder?.Id ?? 0;
                 }
                 else
                 {
-                    throw new Exception("Error adding order to API.");
+                    throw new Exception($"❌ API error: {response.ReasonPhrase}");
                 }
             }
             catch (Exception ex)
             {
-                throw new Exception($"Error adding order: {ex.Message}");
+                throw new Exception($"❌ Error adding order: {ex.Message}");
             }
         }
 
@@ -56,15 +72,15 @@ namespace BlazorSportStoreAuth.Services
         {
             try
             {
-                var response = await _httpClient.PutAsJsonAsync($"{_apiBaseUrl}/{orderInfo.Id}", orderInfo);
+                var response = await _httpClient.PutAsJsonAsync($"{_apiBaseUrl}{orderInfo.Id}", orderInfo);
                 if (!response.IsSuccessStatusCode)
                 {
-                    throw new Exception("Error updating order in API.");
+                    throw new Exception($"❌ Error updating order: {response.ReasonPhrase}");
                 }
             }
             catch (Exception ex)
             {
-                throw new Exception($"Error updating order: {ex.Message}");
+                throw new Exception($"❌ Error updating order: {ex.Message}");
             }
         }
 
@@ -72,11 +88,12 @@ namespace BlazorSportStoreAuth.Services
         {
             try
             {
-                return await _httpClient.GetFromJsonAsync<ProductOrderInfo>($"{_apiBaseUrl}/{orderId}");
+                return await _httpClient.GetFromJsonAsync<ProductOrderInfo>($"{_apiBaseUrl}{orderId}")
+                       ?? throw new Exception($"❌ Order with ID {orderId} not found.");
             }
             catch (Exception ex)
             {
-                throw new Exception($"Error fetching order from API: {ex.Message}");
+                throw new Exception($"❌ Error fetching order: {ex.Message}");
             }
         }
 
@@ -84,15 +101,15 @@ namespace BlazorSportStoreAuth.Services
         {
             try
             {
-                var response = await _httpClient.DeleteAsync($"{_apiBaseUrl}/{orderId}");
+                var response = await _httpClient.DeleteAsync($"{_apiBaseUrl}{orderId}");
                 if (!response.IsSuccessStatusCode)
                 {
-                    throw new Exception("Error deleting order from API.");
+                    throw new Exception($"❌ Error deleting order: {response.ReasonPhrase}");
                 }
             }
             catch (Exception ex)
             {
-                throw new Exception($"Error deleting order: {ex.Message}");
+                throw new Exception($"❌ Error deleting order: {ex.Message}");
             }
         }
     }

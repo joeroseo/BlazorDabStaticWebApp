@@ -214,7 +214,9 @@
                     }
                 }
 
-                CartService.CartItems.Clear();
+                CartService.CartItems.Clear(); //new
+                await LocalStorage.RemoveItemAsync("cartItems"); //new
+                StateHasChanged(); //new
                 await JsRuntime.InvokeVoidAsync("alert", $"Your Order has been placed. Your Order ID is - {generatedOrderId}");
                 NavigationManager.NavigateTo("/");
             }

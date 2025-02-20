@@ -65,5 +65,11 @@ namespace BlazorSportStoreAuth.Services
             await Task.Delay(1000); // Simulating async operation
             CartItems.Clear();
         }
+
+        public void ClearCart()
+        {
+           CartItems.Clear();
+        }
+
     }
 }

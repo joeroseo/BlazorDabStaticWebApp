@@ -8,7 +8,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
-using BlazorSportStoreAuth.Interfaces; // ✅ Correct interface reference
+using BlazorSportStoreAuth.Interfaces; // ✅ Ensure correct interface reference
 
 namespace BlazorSportStoreAuth.Services.Authentication
 {
@@ -16,6 +16,7 @@ namespace BlazorSportStoreAuth.Services.Authentication
     {
         private readonly HttpClient _http;
         private readonly NavigationManager _navigation;
+        private readonly string _apiBaseUrl = "https://nice-pebble-0d420e91e.4.azurestaticapps.net/data-api/rest/";
 
         public AuthService(HttpClient http, NavigationManager navigation)
         {
@@ -33,7 +34,7 @@ namespace BlazorSportStoreAuth.Services.Authentication
 
             Console.WriteLine($"DEBUG: Sending JSON for Registration - {JsonSerializer.Serialize(user)}");
 
-            var response = await _http.PostAsJsonAsync("data-api/rest/Users", user);
+            var response = await _http.PostAsJsonAsync($"{_apiBaseUrl}Users", user);
 
             if (!response.IsSuccessStatusCode)
             {
@@ -48,7 +49,7 @@ namespace BlazorSportStoreAuth.Services.Authentication
         {
             try
             {
-                var response = await _http.GetAsync($"data-api/rest/Users?$filter=Email eq '{email}'");
+                var response = await _http.GetAsync($"{_apiBaseUrl}Users?$filter=Email eq '{email}'");
 
                 if (!response.IsSuccessStatusCode)
                 {

@@ -98,7 +98,7 @@ else
                 return;
             }
 
-            // ✅ Fetch only the user's orders via API
+            // ✅ Ensure email is correctly formatted in API request
             orderInfos = await OrderInfoService.GetOrdersByUserEmail(userEmail);
         }
         catch (Exception ex)

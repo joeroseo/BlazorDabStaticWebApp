@@ -1,7 +1,24 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\joero\\source\\repos\\BlazorSportStoreAuthNew\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{2D7B037C-D9CA-4002-B121-D96722CE24B6}|BlazorSportStoreAuth.csproj|c:\\users\\joero\\source\\repos\\blazorsportstoreauthnew\\interfaces\\iproductorderinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2D7B037C-D9CA-4002-B121-D96722CE24B6}|BlazorSportStoreAuth.csproj|solutionrelative:interfaces\\iproductorderinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2D7B037C-D9CA-4002-B121-D96722CE24B6}|BlazorSportStoreAuth.csproj|c:\\users\\joero\\source\\repos\\blazorsportstoreauthnew\\pages\\ordersummary.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2D7B037C-D9CA-4002-B121-D96722CE24B6}|BlazorSportStoreAuth.csproj|solutionrelative:pages\\ordersummary.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2D7B037C-D9CA-4002-B121-D96722CE24B6}|BlazorSportStoreAuth.csproj|c:\\users\\joero\\source\\repos\\blazorsportstoreauthnew\\services\\productorderinfomanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2D7B037C-D9CA-4002-B121-D96722CE24B6}|BlazorSportStoreAuth.csproj|solutionrelative:services\\productorderinfomanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2D7B037C-D9CA-4002-B121-D96722CE24B6}|BlazorSportStoreAuth.csproj|c:\\users\\joero\\source\\repos\\blazorsportstoreauthnew\\layout\\navmenu.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2D7B037C-D9CA-4002-B121-D96722CE24B6}|BlazorSportStoreAuth.csproj|solutionrelative:layout\\navmenu.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,8 +26,21 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 0,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "IProductOrderInfo.cs",
+              "DocumentMoniker": "C:\\Users\\joero\\source\\repos\\BlazorSportStoreAuthNew\\Interfaces\\IProductOrderInfo.cs",
+              "RelativeDocumentMoniker": "Interfaces\\IProductOrderInfo.cs",
+              "ToolTip": "C:\\Users\\joero\\source\\repos\\BlazorSportStoreAuthNew\\Interfaces\\IProductOrderInfo.cs",
+              "RelativeToolTip": "Interfaces\\IProductOrderInfo.cs",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAswBAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-21T01:08:55.048Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
@@ -18,6 +48,45 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{6324226f-61b6-4f28-92ee-18d4b5fe1e48}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ProductOrderInfoManager.cs",
+              "DocumentMoniker": "C:\\Users\\joero\\source\\repos\\BlazorSportStoreAuthNew\\Services\\ProductOrderInfoManager.cs",
+              "RelativeDocumentMoniker": "Services\\ProductOrderInfoManager.cs",
+              "ToolTip": "C:\\Users\\joero\\source\\repos\\BlazorSportStoreAuthNew\\Services\\ProductOrderInfoManager.cs",
+              "RelativeToolTip": "Services\\ProductOrderInfoManager.cs",
+              "ViewState": "AgIAAGUAAAAAAAAAAAAswHQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-21T01:08:27.748Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "OrderSummary.razor",
+              "DocumentMoniker": "C:\\Users\\joero\\source\\repos\\BlazorSportStoreAuthNew\\Pages\\OrderSummary.razor",
+              "RelativeDocumentMoniker": "Pages\\OrderSummary.razor",
+              "ToolTip": "C:\\Users\\joero\\source\\repos\\BlazorSportStoreAuthNew\\Pages\\OrderSummary.razor",
+              "RelativeToolTip": "Pages\\OrderSummary.razor",
+              "ViewState": "AgIAAGgAAAAAAAAAAAAowHcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-02-21T01:08:09.699Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "NavMenu.razor",
+              "DocumentMoniker": "C:\\Users\\joero\\source\\repos\\BlazorSportStoreAuthNew\\Layout\\NavMenu.razor",
+              "RelativeDocumentMoniker": "Layout\\NavMenu.razor",
+              "ToolTip": "C:\\Users\\joero\\source\\repos\\BlazorSportStoreAuthNew\\Layout\\NavMenu.razor",
+              "RelativeToolTip": "Layout\\NavMenu.razor",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAABcAAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-02-21T00:43:14.607Z",
+              "EditorCaption": ""
             }
           ]
         }

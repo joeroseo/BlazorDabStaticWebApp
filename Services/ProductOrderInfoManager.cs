@@ -17,20 +17,20 @@ namespace BlazorSportStoreAuth.Services
         public ProductOrderInfoManager(HttpClient httpClient, ApiSettings apiSettings)
         {
             _httpClient = httpClient;
-            _apiBaseUrl = $"{apiSettings.BaseUrl}OrderInfos/"; // ✅ Ensure trailing slash
+            _apiBaseUrl = $"{apiSettings.BaseUrl}OrderInfos/"; // ✅ Ensure correct API base URL
         }
 
         public async Task<List<ProductOrderInfo>> GetOrderInfos()
         {
             try
             {
-                var orders = await _httpClient.GetFromJsonAsync<DataApiResponse<ProductOrderInfo>>(_apiBaseUrl);
-                return orders?.Value ?? new List<ProductOrderInfo>(); // ✅ Ensure non-null return
+                var response = await _httpClient.GetFromJsonAsync<DataApiResponse<ProductOrderInfo>>(_apiBaseUrl);
+                return response?.Value ?? new List<ProductOrderInfo>();
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"❌ ERROR fetching all orders: {ex.Message}");
-                return new List<ProductOrderInfo>(); // ✅ Prevent crashes
+                return new List<ProductOrderInfo>();
             }
         }
 
@@ -38,9 +38,8 @@ namespace BlazorSportStoreAuth.Services
         {
             try
             {
-                // ✅ Ensure email is formatted correctly and use the correct API query format
-                var encodedEmail = Uri.EscapeDataString(email); // ✅ Encode email safely
-                var requestUrl = $"{_apiBaseUrl}?$filter=email eq '{encodedEmail}'"; // ✅ Correct OData filter query
+                // ✅ Use the correct OData `$filter` query syntax
+                var requestUrl = $"{_apiBaseUrl}?$filter=email eq '{email}'";
                 Console.WriteLine($"DEBUG: Fetching orders from {requestUrl}");
 
                 var response = await _httpClient.GetAsync(requestUrl);
@@ -49,6 +48,8 @@ namespace BlazorSportStoreAuth.Services
                 {
                     string errorResponse = await response.Content.ReadAsStringAsync();
                     Console.WriteLine($"❌ ERROR: Fetching orders failed - {errorResponse}");
+                    Console.WriteLine($"DEBUG: Failed Fetching orders from {requestUrl}");
+
                     return new List<ProductOrderInfo>();
                 }
 

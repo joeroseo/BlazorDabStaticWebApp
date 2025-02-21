@@ -80,56 +80,69 @@
 
     private async Task ListProducts()
     {
-        try
+        int maxRetries = 15;  // Maximum number of retries
+        int delayMilliseconds = 5000; // Delay between retries (5 seconds)
+
+        for (int attempt = 1; attempt <= maxRetries; attempt++)
         {
-            var response = await HttpClient.GetAsync(apiBase);
-            string responseBody = await response.Content.ReadAsStringAsync();
-            Console.WriteLine($"API Raw Response: {responseBody}");
-
-            if (response.IsSuccessStatusCode)
+            try
             {
-                if (!response.Content.Headers.ContentType?.MediaType.Contains("application/json") ?? true)
+                var response = await HttpClient.GetAsync(apiBase);
+                string responseBody = await response.Content.ReadAsStringAsync();
+                Console.WriteLine($"API Raw Response (Attempt {attempt}): {responseBody}");
+
+                if (response.IsSuccessStatusCode)
                 {
-                    Console.Error.WriteLine("API did not return JSON. Check API response.");
-                    return;
-                }
+                    if (!response.Content.Headers.ContentType?.MediaType.Contains("application/json") ?? true)
+                    {
+                        Console.Error.WriteLine("API did not return JSON. Check API response.");
+                        return;
+                    }
 
-                var deserializedResponse = JsonSerializer.Deserialize<Dictionary<string, List<Product>>>(responseBody,
-                    new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+                    var deserializedResponse = JsonSerializer.Deserialize<Dictionary<string, List<Product>>>(responseBody,
+                        new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 
-                if (deserializedResponse != null && deserializedResponse.ContainsKey("value"))
-                {
-                    products = deserializedResponse["value"]
-                        .Select(p => new Product
-                            {
-                                Id = p.Id,
-                                Name = p.Name,
-                                Price = p.Price,
-                                Category = p.Category,
-                                Image = p.Image,
-                                IsAvailable = p.IsAvailable
-                            }).ToList();
+                    if (deserializedResponse != null && deserializedResponse.ContainsKey("value"))
+                    {
+                        products = deserializedResponse["value"]
+                            .Select(p => new Product
+                                {
+                                    Id = p.Id,
+                                    Name = p.Name,
+                                    Price = p.Price,
+                                    Category = p.Category,
+                                    Image = p.Image,
+                                    IsAvailable = p.IsAvailable
+                                }).ToList();
 
-                    Console.WriteLine($"Deserialized {products.Count} products.");
+                        Console.WriteLine($"Deserialized {products.Count} products.");
 
-                    categories = products.Select(p => p.Category).Where(c => !string.IsNullOrEmpty(c)).ToHashSet();
-                    FilterProducts();
+                        categories = products.Select(p => p.Category).Where(c => !string.IsNullOrEmpty(c)).ToHashSet();
+                        FilterProducts();
+                        return; // Exit loop once successful
+                    }
+                    else
+                    {
+                        Console.Error.WriteLine("Unexpected JSON structure.");
+                    }
                 }
                 else
                 {
-                    Console.Error.WriteLine("Unexpected JSON structure.");
+                    Console.Error.WriteLine($"API Error: {response.StatusCode} - {responseBody}");
                 }
             }
-            else
+            catch (Exception ex)
             {
-                Console.Error.WriteLine($"API Error: {response.StatusCode} - {responseBody}");
+                Console.Error.WriteLine($"Error fetching products (Attempt {attempt}): {ex.Message}");
             }
+
+            // Wait before retrying
+            await Task.Delay(delayMilliseconds);
         }
-        catch (Exception ex)
-        {
-            Console.Error.WriteLine($"Error fetching products: {ex.Message}");
-        }
+
+        Console.Error.WriteLine("Max retries reached. Unable to fetch products.");
     }
+
 
     private void FilterProducts()
     {

@@ -2817,6 +2817,6 @@ C:\Users\joero\source\repos\BlazorSportStoreAuthNew\obj\Debug\net8.0\staticwebas
 C:\Users\joero\source\repos\BlazorSportStoreAuthNew\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 C:\Users\joero\source\repos\BlazorSportStoreAuthNew\obj\Debug\net8.0\BlazorSp.5F1C69D3.Up2Date
 C:\Users\joero\source\repos\BlazorSportStoreAuthNew\obj\Debug\net8.0\ref\BlazorSportStoreAuth.dll
-C:\Users\joero\source\repos\BlazorSportStoreAuthNew\obj\Debug\net8.0\compressed\t8u1ly7gw3-rmva4izte9.gz
-C:\Users\joero\source\repos\BlazorSportStoreAuthNew\obj\Debug\net8.0\compressed\hznh1kd0wd-64b6s0hg56.gz
-C:\Users\joero\source\repos\BlazorSportStoreAuthNew\obj\Debug\net8.0\compressed\h5ckw10ez0-da09xtaxjo.gz
+C:\Users\joero\source\repos\BlazorSportStoreAuthNew\obj\Debug\net8.0\compressed\t8u1ly7gw3-4uh1vdkk2a.gz
+C:\Users\joero\source\repos\BlazorSportStoreAuthNew\obj\Debug\net8.0\compressed\hznh1kd0wd-ffnufaerh7.gz
+C:\Users\joero\source\repos\BlazorSportStoreAuthNew\obj\Debug\net8.0\compressed\h5ckw10ez0-sma7fbplrp.gz
